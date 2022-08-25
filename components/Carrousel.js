@@ -76,7 +76,7 @@ function SwipeableTextMobileStepper() {
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
-        style={ !matches ? { borderRadius: 36 , width: '60pc'} :  { borderRadius: 36 } }
+        style={ !matches ? { borderRadius: 36 , width: '60pc'} :  { borderRadius: 36, width: '23pc' } }
       >
         {images.map((step, index) => (
           <div key={step.label}>

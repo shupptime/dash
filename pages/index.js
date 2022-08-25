@@ -59,7 +59,10 @@ export default function Home() {
       <Box component="main" sx={{ p: 3 }}  className={styles.main}>
        {/*  <Toolbar /> */}
        <Carrousel /> 
-        <Accordion />
+       
+      
+        <Accordion/>
+        
       </Box>
 
       <footer className={styles.footer}>
