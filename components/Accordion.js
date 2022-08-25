@@ -5,6 +5,9 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+//component
+import Card from '../components/Card';
+
 //hook
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -23,10 +26,11 @@ export default function SimpleAccordion() {
           <Typography>Accordion 1</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          {/* <Typography>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          </Typography> */}
+          <Card/>
         </AccordionDetails>
       </Accordion>
       <Accordion>
