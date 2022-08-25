@@ -31,6 +31,8 @@ export default function SimpleAccordion() {
             malesuada lacus ex, sit amet blandit leo lobortis eget.
           </Typography> */}
           <Card/>
+          <Card/>
+          <Card/>
         </AccordionDetails>
       </Accordion>
       <Accordion>
