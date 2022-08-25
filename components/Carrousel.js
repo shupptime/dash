@@ -66,7 +66,7 @@ function SwipeableTextMobileStepper() {
           pl: 2,
           // bgcolor: 'background.default',
           backgroundColor: 'transparent',
-          marginTop: -2
+          marginTop: '7px'
         }}
       >
         {/* <Typography>{images[activeStep].label}</Typography> */}
