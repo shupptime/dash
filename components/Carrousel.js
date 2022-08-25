@@ -16,22 +16,22 @@ const images = [
   {
     label: 'San Francisco – Oakland Bay Bridge, United States',
     imgPath:
-      'https://www.royalqueenseeds.es/img/cms/Critical%20B_1_1.jpg',
+      'https://www.clarin.com/img/2021/06/17/LC25eDtCT_1256x620__1.jpg',
   },
   {
     label: 'Bird',
     imgPath:
-      'https://www.royalqueenseeds.dk/img/cms/Choose-The-Right-Cannabis-Seeds-For-Your-Particular-Needs-Piramide.jpg',
+      'https://www.clarin.com/img/2022/03/02/messi-eligio-los-ingredientes-para___cs6-sN_P0_1256x620__1.jpg',
   },
   {
     label: 'Bali, Indonesia',
     imgPath:
-      'https://www.cannaconnection.com/modules/psblog/uploads/splash/1598019164.jpg',
+      'https://okdiario.com/img/2021/05/28/hamburguesa-gourmet-655x368.jpg',
   },
   {
     label: 'Goč, Serbia',
     imgPath:
-      'https://www.royalqueenseeds.es/img/cms/haze-cannabis.jpg',
+      'https://www.7diasdesabor.com/wp-content/uploads/2021/09/1076fd5d300697841e881a78254d04963a2.jpg',
   },
 ];
 
