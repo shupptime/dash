@@ -9,6 +9,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -39,6 +40,7 @@ function SwipeableTextMobileStepper() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = images.length;
+  const matches = useMediaQuery('(max-width:600px)');
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -74,7 +76,7 @@ function SwipeableTextMobileStepper() {
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
-        style={{ borderRadius: 36 , width: '60pc'}}
+        style={ !matches ? { borderRadius: 36 , width: '60pc'} :  { borderRadius: 36 } }
       >
         {images.map((step, index) => (
           <div key={step.label}>
@@ -82,7 +84,15 @@ function SwipeableTextMobileStepper() {
               <Box
                 component="img"
                 style={{borderRadius: '18px', display: 'initial'}}
-                sx={{
+                sx={
+                  matches ? {
+                    height: 300,
+                  display: 'block',
+                  // maxWidth: '10%',
+                  overflow: 'hidden',
+                  width: '100%',
+                  } :
+                  {
                   height: 455,
                   display: 'block',
                   // maxWidth: '10%',
