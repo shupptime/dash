@@ -5,9 +5,15 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+//hook
+import useMediaQuery from "@mui/material/useMediaQuery";
+
+
 export default function SimpleAccordion() {
+  const matches = useMediaQuery('(max-width:600px)');
+
   return (
-    <div style ={{ marginTop: '5px'}}>
+    <div style ={ matches ? { marginTop: '5px', width: '110%' } : { marginTop: '5px' }}>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
