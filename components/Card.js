@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
@@ -8,14 +9,37 @@ import Box from '@mui/material/Box';
 
 // component
 import CardMedia from '@mui/material/CardMedia';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+
+//incons
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 //hook
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { fontSize } from '@mui/system';
+import useQuiosco from "../hooks/useQuiosco";
 
-function MainFeaturedPost({ producto }) {
+//en el hook esta producto tambien . ver cual va sino cambiar nombre.
+function MainFeaturedPost({ producto }) { 
   const matches = useMediaQuery('(max-width:600px)');
   const { nombre, imagen, precio } = producto;
+
+  const { handleChangeModal, handleAgregarPedido, pedido } = useQuiosco();
+  const [cantidad, setCantidad] = useState(1);
+  const [edicion, setEdicion] = useState(false);
+
+  
+  useEffect(() => {
+    if (pedido.some((pedidoState) => pedidoState.id === producto.id)) {
+      const productoEdicion = pedido.find(
+        (pedidoState) => pedidoState.id === producto.id
+      );
+      setEdicion(true);
+      setCantidad(productoEdicion.cantidad);
+    }
+  }, [producto, pedido]);
 
   return (
     <Paper
@@ -67,17 +91,54 @@ function MainFeaturedPost({ producto }) {
             <Typography variant="h5" color="inherit" paragraph sx = { matches ? { fontSize: "18px"} : ''}>
               {precio}
             </Typography>
-            <Link variant="subtitle1" href="#">
+            {/* <Link variant="subtitle1" href="#">
               aca link ?
-            </Link>
+            </Link> */}
+            <div 
+              style ={{ 
+                display: 'flex',
+                position: 'relative',
+                marginLeft: '-15px'
+              }}
+            >
+              <IconButton 
+                aria-label="delete"
+                type="button"
+                onClick={() => {
+                  if (cantidad <= 1) return;
+                  setCantidad(cantidad - 1);
+                }}
+              >
+                <RemoveCircleOutlineIcon />
+              </IconButton>
+              <p>{cantidad}</p>
+              <IconButton 
+                aria-label="delete"
+                type="button"
+                onClick={() => {
+                  if (cantidad >= 5) return;
+                  setCantidad(cantidad + 1);
+                }}
+              >
+                <AddCircleOutlineIcon />
+              </IconButton>
+              <Button
+                variant="contained" size="small"
+                onClick={() => handleAgregarPedido({ ...producto, cantidad })}
+              >
+                {edicion ? "Editar" : "Agregar"}
+              </Button> 
+            </div>
+
           </Box>
         </Grid>
         <Grid item md={6}>
         <img  style={ !matches ? { display: 'block', marginLeft: "100px", width: "350px", height:"250px" } : {display: 'flex',
-    marginLeft: "200px",
-    width: "125px",
-    height: "133px",
-    marginTop: '-140px'} } src='https://s3-eu-central-1.amazonaws.com/www.burgerking.com.ar.v2/wp-media-folder-burger-king-argentina//home/ubuntu/preview/menu-app/frontend/apps/marketing-website-wordpress-app/web/app/uploads/sites/5/ExtraBurger-XL.png' alt="img" /> 
+          marginLeft: "200px",
+          width: "125px",
+          height: "133px",
+          marginTop: '-140px'} } 
+          src='https://s3-eu-central-1.amazonaws.com/www.burgerking.com.ar.v2/wp-media-folder-burger-king-argentina//home/ubuntu/preview/menu-app/frontend/apps/marketing-website-wordpress-app/web/app/uploads/sites/5/ExtraBurger-XL.png' alt="img" /> 
         </Grid>
         
       </Grid>
