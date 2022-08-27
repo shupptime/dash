@@ -15,7 +15,7 @@ import useQuiosco from "../hooks/useQuiosco";
 export default function SimpleAccordion({ categoria }) {
   const matches = useMediaQuery('(max-width:600px)');
   const { nombre, icono, id } = categoria;
-  const { categoriaActual } = useQuiosco();
+  const { categoriaActual, handleClickCategoria } = useQuiosco();
 
   return (
     <div style ={ matches ? { marginTop: '5px', width: '110%' } : { marginTop: '5px' }}>
@@ -24,6 +24,7 @@ export default function SimpleAccordion({ categoria }) {
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
+          onClick={() => handleClickCategoria(id)}
         >
           <Typography>{nombre}</Typography>
         </AccordionSummary>
