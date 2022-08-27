@@ -7,7 +7,12 @@ import Box from '@mui/material/Box';
 import Accordion  from '../components/Accordion';
 import Carrousel  from '../components/Carrousel';
 
+//hook
+import useQuiosco from '../hooks/useQuiosco';
+
 export default function Home() {
+  const { categorias } = useQuiosco();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,6 +21,22 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
+
+      <Box component="main" sx={{ p: 3 }}  className={styles.main}>
+       {/*  <Toolbar /> */}
+       
+       <Carrousel /> 
+       
+       {
+          categorias.map( (categoria) => (
+            <Accordion key= {categoria.id} categoria ={categoria} />
+          ))
+       }
+       
+        
+      </Box>
+
+
      {/*  <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
@@ -56,15 +77,7 @@ export default function Home() {
           </a>
         </div>
       </main> */}
-      <Box component="main" sx={{ p: 3 }}  className={styles.main}>
-       {/*  <Toolbar /> */}
-       <Carrousel /> 
-       
       
-        <Accordion/>
-        
-      </Box>
-
       <footer className={styles.footer}>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
