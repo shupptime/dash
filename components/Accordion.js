@@ -9,12 +9,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Card from '../components/Card';
 
 //hook
-import useMediaQuery from "@mui/material/useMediaQuery";
-//ver si agregar categoria actual
+import useMediaQuery from "@mui/material/useMediaQuery"; //query
+import useQuiosco from "../hooks/useQuiosco";
 
 export default function SimpleAccordion({ categoria }) {
   const matches = useMediaQuery('(max-width:600px)');
   const { nombre, icono, id } = categoria;
+  const { categoriaActual } = useQuiosco();
 
   return (
     <div style ={ matches ? { marginTop: '5px', width: '110%' } : { marginTop: '5px' }}>
@@ -31,7 +32,7 @@ export default function SimpleAccordion({ categoria }) {
           {categoriaActual?.productos?.map((producto) => (
             <Card key={producto.id} producto={producto} />
           ))}
-          
+
         {/* <Card/>
         <Card/> */}
 

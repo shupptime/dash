@@ -13,9 +13,9 @@ import CardMedia from '@mui/material/CardMedia';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { fontSize } from '@mui/system';
 
-function MainFeaturedPost(props) {
-  const { post } = props;
+function MainFeaturedPost({ producto }) {
   const matches = useMediaQuery('(max-width:600px)');
+  const { nombre, imagen, precio } = producto;
 
   return (
     <Paper
@@ -61,11 +61,11 @@ function MainFeaturedPost(props) {
               pr: { md: 0 },
             }}
           >
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom sx = { matches ? { fontSize: "2rem"} : ''}>
-              Gran burger
+            <Typography component="h1" variant="h3" color="inherit" gutterBottom sx = { matches ? { fontSize: "18px", width: '85%'} : ''}>
+              {nombre}
             </Typography>
-            <Typography variant="h5" color="inherit" paragraph>
-             ver precio
+            <Typography variant="h5" color="inherit" paragraph sx = { matches ? { fontSize: "18px"} : ''}>
+              {precio}
             </Typography>
             <Link variant="subtitle1" href="#">
               aca link ?
