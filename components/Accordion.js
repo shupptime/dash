@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 //component
 import Card from '../components/Card';
 
+
 //hook
 import useMediaQuery from "@mui/material/useMediaQuery"; //query
 import useQuiosco from "../hooks/useQuiosco";
@@ -34,24 +35,10 @@ export default function SimpleAccordion({ categoria }) {
             <Card key={producto.id} producto={producto} />
           ))}
 
-        {/* <Card/>
-        <Card/> */}
 
-          {/* <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography> */}
         </AccordionDetails>
       </Accordion>
-      {/*<Accordion disabled>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
-          <Typography>Disabled Accordion</Typography>
-        </AccordionSummary>
-      </Accordion> */}
+  
     </div>
   );
 }

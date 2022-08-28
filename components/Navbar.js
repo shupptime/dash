@@ -13,6 +13,36 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Badge from '@mui/material/Badge';
+import Modal from '@mui/material/Modal';
+
+// syles
+import { styled } from '@mui/material/styles';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}));
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: "85%",
+  height: "88%",
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  flexGrow: 1, padding: "3pc",
+  overflow: 'auto'
+};
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
@@ -24,6 +54,10 @@ function DrawerAppBar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -72,6 +106,30 @@ function DrawerAppBar(props) {
               </Button>
             ))}
           </Box>
+          <Box sx={{ marginLeft: '280px', display: { xs: 'block', sm: 'block' } }}>
+              
+              <IconButton aria-label="cart" onClick={ () => { handleOpen() }}>
+                <StyledBadge badgeContent={0} color="secondary">
+                  <ShoppingCartIcon />
+                </StyledBadge>
+              </IconButton>
+           
+          </Box>
+          
+          {/* Modal */}
+          <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+             <Box sx={style}>
+              <Typography variant="h4" sx={{ mb: 5 }}>
+                Products
+              </Typography>
+            </Box>
+          </Modal>
+
         </Toolbar>
       </AppBar>
       <Box component="nav">
