@@ -25,9 +25,9 @@ export default function SimpleAccordion({ categoria }) {
   return (
     <div style ={ matches ? { marginTop: '5px' } : { marginTop: '5px', width: '80%' }}>
       <Accordion  
-        expanded={expanded === `${nombre}` } 
-        onChange={handleChange(nombre)}
-        onClick={() => handleClickCategoria(id)}
+        // expanded={expanded === `${nombre}` } 
+        // onChange={handleChange(nombre)}
+        onChange={() => handleClickCategoria(id)}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

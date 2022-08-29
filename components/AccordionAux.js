@@ -29,7 +29,7 @@ export default function ControlledAccordions({ categoria }) {
       <Accordion 
         expanded={expanded === nombre } 
         onChange={handleChange(nombre)}
-        onClick={ handleClickCategoria(id)}
+        onClick={() => handleClickCategoria(id)}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
