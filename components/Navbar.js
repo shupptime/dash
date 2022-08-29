@@ -17,6 +17,7 @@ import Badge from '@mui/material/Badge';
 import Modal from '@mui/material/Modal';
 
 //Componets
+import CardResumen from '../components/CardResumen';
 import Card from '../components/Card';
 
 //Hook
@@ -40,8 +41,8 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: "85%",
-  height: "88%",
+  width: "95%", //85
+  height: "89%", //82
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -135,15 +136,15 @@ function DrawerAppBar(props) {
               <Typography variant="h4" sx={{ mb: 5 }}>
                 Products
               </Typography>
-              <Typography>
+              
                   {pedido.length === 0 ? (
                     <p>No hay elementos en tu pedido</p>
                     ) : (
                     pedido.map((producto) => (
-                      <Card key={producto.id} producto={producto} />
+                      <CardResumen key={producto.id} producto={producto} />
                     ))
                   )}
-              </Typography>
+              
             </Box>
           </Modal>
 
