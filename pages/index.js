@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 import Accordion  from '../components/Accordion';
+import AccordionAux  from '../components/AccordionAux';
 import Carrousel  from '../components/Carrousel';
 
 //hook
@@ -27,11 +28,13 @@ export default function Home() {
        
        <Carrousel /> 
        
-       {
+       {/* {
           categorias.map( (categoria) => (
             <Accordion key= {categoria.id} categoria ={categoria} />
           ))
-       }
+       } */}
+
+       <AccordionAux/>
        
         
       </Box>
