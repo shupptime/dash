@@ -144,8 +144,24 @@ function DrawerAppBar(props) {
                       <CardResumen key={producto.id} producto={producto} />
                     ))
                   )}
-              
+              <div>
+               <Button 
+                  sx = {{ width: '90px', height: '55px', marginLeft: '35px', fontSize: "11px"}}
+                  variant="contained" size="large"
+                  onClick={() =>handleEliminarProducto(producto.id)}
+                >
+                  pedir
+                </Button> 
+                <Button
+                  sx = {{ width: '90px', height: '55px', marginLeft: '15px', fontSize: "11px"}}
+                  variant="contained" size="large"
+                  onClick={() =>handleEliminarProducto(producto.id)}
+                >
+                  Cancelar
+                </Button>
+              </div> 
             </Box>
+            
           </Modal>
 
         </Toolbar>
