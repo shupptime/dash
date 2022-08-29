@@ -5,12 +5,19 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+
+//component
+import Card from '../components/Card';
+
 //hook
 import useMediaQuery from "@mui/material/useMediaQuery"; //query
 import useQuiosco from "../hooks/useQuiosco";
 
-export default function ControlledAccordions() {
+export default function ControlledAccordions({ categoria }) {
   const [expanded, setExpanded] = React.useState(false);
+
+  const { nombre, icono, id } = categoria;
+  const { categoriaActual, handleClickCategoria } = useQuiosco();
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -19,25 +26,33 @@ export default function ControlledAccordions() {
 
   return (
     <div style ={ matches ? { marginTop: '5px' } : { marginTop: '5px', width: '80%' }}>
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+      <Accordion 
+        expanded={expanded === nombre } 
+        onChange={handleChange(nombre)}
+        onClick={ handleClickCategoria(id)}
+      >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
-          id="panel1bh-header"
+          id= {nombre + "bh-header"} //"panel1bh-header" ``
         >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
-            General settings
+          <Typography>
+            {nombre}
           </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography>
+          
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          {/* <Typography>
             Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
             Aliquam eget maximus est, id dignissim quam.
-          </Typography>
+          </Typography> */}
+          {categoriaActual?.productos?.map((producto) => (
+            <Card key={producto.id} producto={producto} />
+          ))}
+
         </AccordionDetails>
       </Accordion>
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+    {/*   <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2bh-content"
@@ -89,24 +104,9 @@ export default function ControlledAccordions() {
             Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
             amet egestas eros, vitae egestas augue. Duis vel est augue.
           </Typography>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
-            amet egestas eros, vitae egestas augue. Duis vel est augue.
-          </Typography>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
-            amet egestas eros, vitae egestas augue. Duis vel est augue.
-          </Typography>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
-            amet egestas eros, vitae egestas augue. Duis vel est augue.
-          </Typography>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
-            amet egestas eros, vitae egestas augue. Duis vel est augue.
-          </Typography>
+          
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
     </div>
   );
 }

@@ -28,13 +28,13 @@ export default function Home() {
        
        <Carrousel /> 
        
-       {/* {
+       {
           categorias.map( (categoria) => (
             <Accordion key= {categoria.id} categoria ={categoria} />
           ))
-       } */}
+       }
 
-       <AccordionAux/>
+       {/* <AccordionAux/> */}
        
         
       </Box>

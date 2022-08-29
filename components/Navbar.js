@@ -16,6 +16,12 @@ import Button from '@mui/material/Button';
 import Badge from '@mui/material/Badge';
 import Modal from '@mui/material/Modal';
 
+//Componets
+import Card from '../components/Card';
+
+//Hook
+import useQuiosco from "../hooks/useQuiosco";
+
 // syles
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -58,6 +64,8 @@ function DrawerAppBar(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const { pedido } = useQuiosco();
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -126,6 +134,15 @@ function DrawerAppBar(props) {
              <Box sx={style}>
               <Typography variant="h4" sx={{ mb: 5 }}>
                 Products
+              </Typography>
+              <Typography>
+                  {pedido.length === 0 ? (
+                    <p>No hay elementos en tu pedido</p>
+                    ) : (
+                    pedido.map((producto) => (
+                      <Card key={producto.id} producto={producto} />
+                    ))
+                  )}
               </Typography>
             </Box>
           </Modal>
