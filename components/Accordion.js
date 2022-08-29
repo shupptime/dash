@@ -19,7 +19,7 @@ export default function SimpleAccordion({ categoria }) {
   const { categoriaActual, handleClickCategoria } = useQuiosco();
 
   return (
-    <div style ={ matches ? { marginTop: '5px', width: '110%' } : { marginTop: '5px' }}>
+    <div style ={ matches ? { marginTop: '5px' } : { marginTop: '5px', width: '80%' }}>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
