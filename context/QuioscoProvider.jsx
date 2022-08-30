@@ -1384,7 +1384,7 @@ const QuioscoProvider = ({children}) => {
 
 
             toast.success('Pedido Realizado Correctamente')
-            let url = 'https://api.whatsapp.com/send?phone=541168640728&text=Hola!%20Mi%20nombre%20es:%20'
+            let url = 'https://api.whatsapp.com/send?phone=541136936750&text=Hola!%20Mi%20nombre%20es:%20' // 68640728
             let infoPedido = '';
               
             if (pedido.length >= 2){

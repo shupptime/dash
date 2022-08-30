@@ -56,8 +56,8 @@ function MainFeaturedPost({ producto }) {
         backgroundImage: 'red',
         maxWidth: "700px",
         height: "23%",
-         marginRight: '-2pc',
-         marginLeft: '-35px'
+        marginRight: '-2pc',
+        marginLeft: '-35px'
       }}
     >
       {/* Increase the priority of the hero background image */}
@@ -91,7 +91,7 @@ function MainFeaturedPost({ producto }) {
               pr: { md: 0 },
             }}
           >
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom sx = { matches ? { fontSize: "16px", width: '85%'} : ''}>
+            <Typography component="h1" variant="h3" color="inherit" gutterBottom sx = { matches ? { fontSize: "16px"} : ''}> {/*  width: '85%' */}
               {nombre}
             </Typography>
             <Typography variant="h5" color="inherit" paragraph sx = { matches ? { fontSize: "15px"} : ''}>

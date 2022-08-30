@@ -68,7 +68,7 @@ function DrawerAppBar(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { pedido } = useQuiosco();
+  const { pedido, colocarOrden } = useQuiosco();
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -146,33 +146,37 @@ function DrawerAppBar(props) {
                 Resumen
               </Typography>
               
-                  {pedido.length === 0 ? (
-                    <p>No hay elementos en tu pedido</p>
-                    ) : (
-                    pedido.map((producto) => (
-                      <CardResumen key={producto.id} producto={producto} />
-                    ))
-                  )}
-              <div>
-               <Button 
-                  sx = {{ width: '90px', height: '55px', marginLeft: '35px', fontSize: "11px"}}
-                  variant="contained" size="large"
-                  onClick={() =>handleEliminarProducto(producto.id)}
-                >
-                  pedir
-                </Button> 
-                <Button
-                  sx = {{ width: '90px', height: '55px', marginLeft: '15px', fontSize: "11px"}}
-                  variant="contained" size="large"
-                  onClick={() =>handleClose()}
-                >
-                  Cancelar
-                </Button>
-              </div> 
-            </Box>
-            
-          </Modal>
+                {pedido.length === 0 ? (
+                  <p style={{ textAlign: 'center' }}>No hay elementos en tu pedido</p>
+                  ) : (
+                  pedido.map((producto) => (
+                    <CardResumen key={producto.id} producto={producto} />
+                  ))
+                )}
 
+               { pedido.length !== 0 ? (
+                  <>
+                    <Button 
+                      sx = {{ width: '90px', height: '55px', marginLeft: '35px', fontSize: "11px"}}
+                      variant="contained" size="large"
+                      // onClick={() =>handleEliminarProducto(producto.id)}
+                      onClick={colocarOrden}
+                    >
+                      pedir
+                    </Button> 
+                    <Button
+                      sx = {{ width: '90px', height: '55px', marginLeft: '15px', fontSize: "11px"}}
+                      variant="contained" size="large"
+                      onClick={() =>handleClose()}
+                    >
+                      Cancelar
+                    </Button>
+                  </>
+                  ) : <> </> 
+                }
+              
+            </Box>
+          </Modal>
         </Toolbar>
       </AppBar>
       <Box component="nav">
