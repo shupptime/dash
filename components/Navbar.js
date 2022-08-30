@@ -135,8 +135,15 @@ function DrawerAppBar(props) {
               aria-describedby="modal-modal-description"
             >
              <Box sx={style}>
-              <Typography variant="h4" sx={{ mb: 5 }}>
-                Products
+              <h3 
+                style= {{ marginLeft: '260PX', marginTop: '-20px'}} 
+                onClick={() =>handleClose()}
+              > 
+                X
+              </h3>
+
+              <Typography variant="h4" sx={{ mb: 5, textAlign: 'center' }}>
+                Resumen
               </Typography>
               
                   {pedido.length === 0 ? (
@@ -157,7 +164,7 @@ function DrawerAppBar(props) {
                 <Button
                   sx = {{ width: '90px', height: '55px', marginLeft: '15px', fontSize: "11px"}}
                   variant="contained" size="large"
-                  onClick={() =>handleEliminarProducto(producto.id)}
+                  onClick={() =>handleClose()}
                 >
                   Cancelar
                 </Button>
