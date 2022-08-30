@@ -45,16 +45,19 @@ function MainFeaturedPost({ producto }) {
     <Paper
       sx={{
         position: 'relative',
+        //position: 'absolute',
         backgroundColor: 'grey.800',
+        // backgroundColor: 'grey!important',
         color: '#fff',
         mb: 4,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundImage: 'red',
-        width: "126%",
+        maxWidth: "700px",
         height: "23%",
-        marginLeft: '-35px'
+         marginRight: '-2pc',
+         marginLeft: '-35px'
       }}
     >
       {/* Increase the priority of the hero background image */}
@@ -78,7 +81,7 @@ function MainFeaturedPost({ producto }) {
         }}
       />
     
-      <Grid container>
+      <Grid container >
       
         <Grid item md={6}>
           <Box
@@ -145,12 +148,13 @@ function MainFeaturedPost({ producto }) {
 
           </Box>
         </Grid>
-        <Grid item md={6}>
+        <Grid item md={6} >
         <img  style={ !matches ? { display: 'block', marginLeft: "100px", width: "350px", height:"250px" } : {display: 'flex',
           marginLeft: "220px",
           width: "125px",
-          height: "133px",
-          marginTop: '-160px'} } 
+          height: "155px",
+          marginTop: '-151px',
+            }} 
           src='https://s3-eu-central-1.amazonaws.com/www.burgerking.com.ar.v2/wp-media-folder-burger-king-argentina//home/ubuntu/preview/menu-app/frontend/apps/marketing-website-wordpress-app/web/app/uploads/sites/5/ExtraBurger-XL.png' alt="img" /> 
         </Grid>
         

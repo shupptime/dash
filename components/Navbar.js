@@ -47,8 +47,10 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
-  flexGrow: 1, padding: "3pc",
-  overflow: 'auto'
+  flexGrow: 1,
+  padding: "3pc",
+  overflow: 'auto',
+  
 };
 
 const drawerWidth = 240;
