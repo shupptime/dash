@@ -16,9 +16,12 @@ import Button from '@mui/material/Button';
 import Badge from '@mui/material/Badge';
 import Modal from '@mui/material/Modal';
 
+import "react-toastify/dist/ReactToastify.css";
+
 //Componets
 import CardResumen from '../components/CardResumen';
 import Card from '../components/Card';
+import { ToastContainer } from "react-toastify";
 
 //Hook
 import useQuiosco from "../hooks/useQuiosco";
@@ -196,7 +199,7 @@ function DrawerAppBar(props) {
           {drawer}
         </Drawer>
       </Box>
-      
+      <ToastContainer autoClose={700}  style ={{ marginTop: '56px'}} />
     </Box>
   );
 }
