@@ -20,6 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Products() {
   const { categoriaActual, handleClickCategoria } = useQuiosco();
+  console.log("categoriaActual: --", categoriaActual)
 
   return (
     <>

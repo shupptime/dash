@@ -912,7 +912,7 @@ const QuioscoProvider = ({children}) => {
         const data = { categoria: categoria[0], productos: productosEnCategoria }
         // setCategoriaActual(categoria[0]) --old version
         setCategoriaActual(data)  
-        router.push('/')
+        router.push('/ProductsList') /*  antes al '/' */
     }
 
     const handleSetProducto = producto => {

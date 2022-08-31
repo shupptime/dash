@@ -5,6 +5,9 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { useRouter } from 'next/router'
 
+// hooks
+import useQuiosco from "../hooks/useQuiosco";
+
 const style = {
   width: '100%',
   maxWidth: 360,
@@ -15,10 +18,11 @@ export default function ListDividers({categoria}) {
 
   const { nombre, icono, id } = categoria;
   const router = useRouter()
-
+  const { handleClickCategoria } = useQuiosco();
+  
   return (
-    <List sx={style} component="nav" aria-label="mailbox folders">
-      <ListItem button onClick={ ()=> router.push('/ProductsList') }>
+    <List sx={style}  component="nav" aria-label="mailbox folders">
+      <ListItem button onClick={ ()=> {handleClickCategoria(id)}  }> 
         <ListItemText primary={nombre} />
       </ListItem>
       <Divider /> {/* light */}
