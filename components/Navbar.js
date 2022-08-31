@@ -34,7 +34,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     right: -3,
     top: 13,
-    border: `2px solid ${theme.palette.background.paper}`,
+    border: `1px solid ${theme.palette.background.paper}`,
     padding: '0 4px',
   },
 }));
@@ -123,7 +123,7 @@ function DrawerAppBar(props) {
           <Box sx={{ marginLeft: '280px', display: { xs: 'block', sm: 'block' } }}>
               
               <IconButton aria-label="cart" onClick={ () => { handleOpen() }}>
-                <StyledBadge badgeContent={0} color="secondary">
+                <StyledBadge badgeContent={  pedido.length } color="secondary">
                   <ShoppingCartIcon />
                 </StyledBadge>
               </IconButton>
