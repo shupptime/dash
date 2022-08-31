@@ -15,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Badge from '@mui/material/Badge';
 import Modal from '@mui/material/Modal';
+import { useRouter } from 'next/router'
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -72,6 +73,7 @@ function DrawerAppBar(props) {
   const handleClose = () => setOpen(false);
 
   const { pedido, colocarOrden } = useQuiosco();
+  const router = useRouter()
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -82,7 +84,7 @@ function DrawerAppBar(props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemButton sx={{ textAlign: 'center' }}  onClick={ ()=>router.push('/')} >
               <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>
@@ -122,7 +124,7 @@ function DrawerAppBar(props) {
           </Box>
           <Box sx={{ marginLeft: '280px', display: { xs: 'block', sm: 'block' } }}>
               
-              <IconButton aria-label="cart" onClick={ () => { handleOpen() }}>
+              <IconButton aria-label="cart" onClick={ ()=>router.push('/CarritoResumen') }> {/* () => { handleOpen() } */}
                 <StyledBadge badgeContent={  pedido.length } color="secondary">
                   <ShoppingCartIcon />
                 </StyledBadge>

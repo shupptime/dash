@@ -4,9 +4,12 @@ import styles from '../styles/Home.module.css'
 import Navbar from '../components/Navbar';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
+
+//Components
 import Accordion  from '../components/Accordion';
 import AccordionAux  from '../components/AccordionAux';
 import Carrousel  from '../components/Carrousel';
+import MenuList from '../components/MenuList';
 
 //hook
 import useQuiosco from '../hooks/useQuiosco';
@@ -28,14 +31,18 @@ export default function Home() {
        
        <Carrousel /> 
        
-       {
+       {/* {
           categorias.map( (categoria) => (
             <Accordion key= {categoria.id} categoria ={categoria} />
           ))
        }
-
-       {/* <AccordionAux/> */}
-       
+      */}
+     
+       {
+          categorias.map( (categoria) => (
+            <MenuList key= {categoria.id} categoria ={categoria} />
+          ))
+       }
         
       </Box>
 
