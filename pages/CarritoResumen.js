@@ -45,7 +45,7 @@ export default function Products() {
                     { pedido.length !== 0 ? (
                         <>
                             <Button 
-                            sx = {{ marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
+                            sx = {{ background:'radial-gradient(orange, transparent)', marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
                             variant="contained" size="large"
                             // onClick={() =>handleEliminarProducto(producto.id)}
                             onClick={colocarOrden}

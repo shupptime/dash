@@ -45,7 +45,9 @@ function MainFeaturedPost({ producto }) {
     <Paper
       sx={{
         position: 'relative',
-        backgroundColor: 'grey.800',
+        // backgroundColor: 'grey.800',
+        backgroundColor: '#9894949c',
+        borderRadius: '47px',
         color: '#fff',
         mb: 4,
         backgroundSize: 'cover',
@@ -69,7 +71,7 @@ function MainFeaturedPost({ producto }) {
           bottom: 0,
           right: 0,
           left: 0,
-          backgroundColor: 'rgba(0,0,0,.3)',
+          // backgroundColor: 'rgba(0,0,0,.3)',
           display: 'flex', flexDirection: 'column'
 
         }}
@@ -123,6 +125,7 @@ function MainFeaturedPost({ producto }) {
                 <AddCircleOutlineIcon />
               </IconButton>
               <Button
+                sx ={{ background:'radial-gradient(black, transparent)'}}
                 variant="contained" size="small"
                 onClick={() => handleAgregarPedido({ ...producto, cantidad })}
               >

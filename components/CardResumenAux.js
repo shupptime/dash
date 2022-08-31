@@ -46,7 +46,8 @@ function MainFeaturedPost({ producto }) {
       sx={{
         position: 'relative',
         //position: 'absolute',
-        backgroundColor: 'grey.800',
+        backgroundColor: '#9894949c',
+        borderRadius: '47px',
         // backgroundColor: 'grey!important',
         color: '#fff',
         mb: 4,
@@ -75,7 +76,7 @@ function MainFeaturedPost({ producto }) {
           bottom: 0,
           right: 0,
           left: 0,
-          backgroundColor: 'rgba(0,0,0,.3)',
+          // backgroundColor: 'rgba(0,0,0,.3)',
           display: 'flex', flexDirection: 'column'
 
         }}
@@ -131,14 +132,14 @@ function MainFeaturedPost({ producto }) {
                 <AddCircleOutlineIcon />
               </IconButton>
               <Button
-               sx = {{ width: '35px', height: '35px', marginLeft: '5px', fontSize: "11px"}}
+               sx = {{ background:'radial-gradient(black, transparent)', width: '35px', height: '35px', marginLeft: '5px', fontSize: "11px"}}
                 variant="contained" size="small"
                 onClick={() => handleAgregarPedido({ ...producto, cantidad })}
               >
                 {edicion ? "Editar" : "Agregar"}
               </Button> 
               <Button
-                 sx = {{ width: '35px', height: '35px', marginLeft: '5px', fontSize: "11px"}}
+                 sx = {{ background:'radial-gradient(red, transparent)', width: '35px', height: '35px', marginLeft: '5px', fontSize: "11px"}}
                 variant="contained" size="small"
                 onClick={() =>handleEliminarProducto(producto.id)}
               >
