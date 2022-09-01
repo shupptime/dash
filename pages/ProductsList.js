@@ -26,7 +26,7 @@ export default function Products() {
   return (
     <>
       <Navbar />
-      <Box sx={{ flexGrow: 1, padding: "3pc", marginTop:"45px", textAlign: 'center'}}>
+      <Box sx={{ flexGrow: 1, padding: "3pc", marginTop:"45px"}}>
         <Grid container spacing={2}>
           {categoriaActual?.productos?.map((producto) => (
               <Card key={producto.id} producto={producto} />
