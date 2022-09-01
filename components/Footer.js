@@ -41,7 +41,7 @@ function Copyright(props) {
   );
 }
 
-const insta = 'https://www.instagram.com/p/CeZkjN5J0Jz/?igshid=YmMyMTA2M2Y%3D'
+const insta = 'https://www.instagram.com/'
 
 
 function PricingContent() {
@@ -56,7 +56,7 @@ function PricingContent() {
   const handleChange = (event) => {
     const val =  event.target.value;
     
-    let dirAux = 'https://api.whatsapp.com/send?phone=541168640728&text=Hola!%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20'; 
+    let dirAux = 'https://api.whatsapp.com/send?phone=5411369367508&text=Hola!%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20'; 
     let res = dirAux + 'el%20precio%20de%20X%20' + val + '%20Semillas%20';
     setDir(res)
  
