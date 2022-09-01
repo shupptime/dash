@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Image from 'next/image'
 import Navbar from '../components/Navbar';
 import Carrousel  from '../components/Carrousel';
+import Footer from '../components/Footer';
 
 export default function Layout({ children, pagina }) {
   const { modal } = useQuiosco();
@@ -28,7 +29,7 @@ export default function Layout({ children, pagina }) {
   
       </Box>
         
-      <footer className={styles.footer}>
+      {/* <footer className={styles.footer}>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
@@ -39,7 +40,8 @@ export default function Layout({ children, pagina }) {
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
-      </footer>
+      </footer> */}
+      <Footer/>
     </div>
   );
 }
