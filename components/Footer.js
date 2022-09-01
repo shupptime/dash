@@ -70,7 +70,7 @@ function PricingContent() {
         component="footer"
         sx={{
           /* borderTop: (theme) => `1px solid ${theme.palette.divider}` ,*/
-          mt: '-3pc',
+          mt: '35px',
           py: [3, 6],
         }}
       >
