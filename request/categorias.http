@@ -1,0 +1,32 @@
+@api = https://zafirus-c.herokuapp.com
+@apiLocal = http://localhost:3000
+
+### 
+GET {{apiLocal}}/api/hello
+
+###
+GET {{apiLocal}}/api/categorias
+
+###
+POST {{apiLocal}}/api/categorias
+Content-type: application/json
+
+ {
+    "title":"melda tapia"
+ }
+
+
+###
+
+PUT {{apiLocal}}/api/categorias/6328dff140cdde1150b408a4
+Content-type: application/json
+
+ {
+    "title":"XXXX"
+ }
+
+
+
+###
+DELETE https://zafirus-c.herokuapp.com/users/62c2249fe35b235a0161368b
+
