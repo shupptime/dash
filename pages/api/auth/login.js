@@ -7,12 +7,13 @@ dbConnect();
 
 export default async function singIn(req, res) {
     const { body, method } = req;
+    const { email } = body;
    
-    const email = 'email'; // sethardcore
+   
+   // const email = 'email'; // sethardcore
    
    try {
         const userFound = await User.findOne({ email });
-        
         
         const token = userFound.generateToken();
         const serialized = serialize("myTokenName", token, {

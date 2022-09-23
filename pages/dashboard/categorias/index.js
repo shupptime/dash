@@ -4,6 +4,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
 const style = {
     width: '100%',
@@ -24,6 +26,11 @@ export default function Home({categoria}) {
              <> 
               <ListItem button  style={{ textAlign: 'center' }} > 
                   <ListItemText primary={cat.title} />
+                  <Stack direction="row" spacing={1}>
+                    <Chip label="primary" color="primary" variant="outlined" />
+                      <Chip label="success" color="success" variant="outlined" />
+                   </Stack>
+
               </ListItem>
               <Divider /> {/* light */}
             </>

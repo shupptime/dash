@@ -31,17 +31,7 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
     
-    const aux = {
-      email: data.get('email'),
-      password: data.get('password'),
-    };
-
-
-    setCredentials(aux)
-    
-
     const res = await axios.post("/api/auth/login", credentials);
     console.log("res:", res);
 
@@ -80,6 +70,12 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+               onChange={(e) =>
+            setCredentials({
+              ...credentials,
+              email: e.target.value,
+            })
+          }
             />
             <TextField
               margin="normal"
@@ -90,6 +86,12 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) =>
+                setCredentials({
+                  ...credentials,
+                  password: e.target.value,
+                })
+              }
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
