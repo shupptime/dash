@@ -18,7 +18,9 @@ export default async (req, res) => {
     case "POST":
       try {
         const newCategory = new Categoria(req.body);
+
         const savedCategory = await newCategory.save();
+        console.log("savedCategory:", savedCategory);
         return res.status(201).json(savedCategory);
       } catch (error) {
         return res.status(400).json({ msg: error.message });

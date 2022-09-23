@@ -12,7 +12,7 @@ POST {{apiLocal}}/api/categorias
 Content-type: application/json
 
  {
-    "title":"melda tapia"
+    "title":"hamburguesa"
  }
 
 

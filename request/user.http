@@ -1,0 +1,14 @@
+@api = https://zafirus-c.herokuapp.com
+@apiLocal = http://localhost:3000
+
+
+###
+POST {{apiLocal}}/api/auth/register
+Content-type: application/json
+
+ {
+    "name": "diegoo",
+    "lastname": "armando",
+    "email": "diegotest",
+    "password": "1234"
+ }
