@@ -32,8 +32,12 @@ export default function Home() {
 
         <List sx={style}  component="nav" aria-label="mailbox folders">
            
-            <ListItem button  style={{ textAlign: 'center' }} > 
-                <ListItemText primary="PRODUCTOS" />
+            <ListItem 
+              button  
+              style={{ textAlign: 'center' }}
+              onClick={ ()=> { router.push("/dashboard/productos")} } 
+            > 
+              <ListItemText primary="PRODUCTOS" />
             </ListItem>
             <Divider /> {/* light */}
 

@@ -19,7 +19,7 @@ const ProductoSchema = new Schema(
         trim: true
     },
     categoryId: {
-        type: Number,
+        type: String,
         required: [true, "The property 'categoyId' is required "],
       },
     

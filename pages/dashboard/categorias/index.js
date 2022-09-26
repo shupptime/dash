@@ -69,6 +69,7 @@ export default function Home({categoria}) {
         <Button 
           style = {{ background:'radial-gradient(orange, transparent)', marginTop: '25px' ,marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
           variant="contained" size="large"
+          onClick={ ()=> { router.push(`/dashboard/categorias/add`) }}
         >
             Agregar
         </Button> 

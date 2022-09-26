@@ -1,6 +1,6 @@
 
 import axios from "axios";
-import Layout from '../../layout/Layout';
+import Layout from '../../../../layout/Layout';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -57,7 +57,7 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Edit
+            Edit Product
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
