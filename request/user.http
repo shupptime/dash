@@ -7,8 +7,8 @@ POST {{apiLocal}}/api/auth/register
 Content-type: application/json
 
  {
-    "name": "diegoo",
-    "lastname": "armando",
-    "email": "diegotest",
-    "password": "1234"
+    "name": "luciano",
+    "lastname": "mastrangelo",
+    "email": "test@eat.ser.com",
+    "password": "test"
  }

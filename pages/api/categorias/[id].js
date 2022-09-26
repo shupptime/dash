@@ -14,7 +14,7 @@ export default async function categoryHandler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const Categoria = await Categoria.findById(id);
+        const category = await Categoria.findById(id);
         if (!category) return res.status(404).json({ msg: "category does not exists" });
         return res.status(200).json(category);
       } catch (error) {

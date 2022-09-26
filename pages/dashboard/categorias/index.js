@@ -47,9 +47,9 @@ export default function Home({categoria}) {
         <List sx={style}  component="nav" aria-label="mailbox folders">
            {
             categoria.map((cat) => (
-             <> 
-              <ListItem button key = {cat.id}> 
-                  <ListItemText primary={cat.title} />
+             <div key = {cat._id}> 
+              <ListItem button> 
+                  <ListItemText primary={cat.title}  onClick={ ()=> { router.push(`/dashboard/categorias/${cat._id}/edit`) }} />
                   <Stack direction="row" spacing={1}>
                     {/* <Chip label="primary" color="primary" variant="outlined" /> */}
                     <Chip 
@@ -62,7 +62,7 @@ export default function Home({categoria}) {
                    </Stack>
               </ListItem>
               <Divider /> {/* light */}
-            </>
+            </div>
             ))
            }
         </List>

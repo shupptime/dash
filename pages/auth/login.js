@@ -33,7 +33,6 @@ export default function Login() {
     event.preventDefault();
     
     const res = await axios.post("/api/auth/login", credentials);
-    console.log("res:", res);
 
     if (res.status === 200) {
       router.push("/dashboard");
@@ -44,7 +43,7 @@ export default function Login() {
   return (
     <Layout>
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" style= {{ marginTop: '-225px'}}>
         <CssBaseline />
         <Box
           sx={{

@@ -5,14 +5,17 @@
 GET {{apiLocal}}/api/hello
 
 ###
-GET {{apiLocal}}/api/categorias
+GET {{apiLocal}}/api/categorias/
+
+###
+GET {{apiLocal}}/api/categorias/632e59669b026568ad8abbce
 
 ###
 POST {{apiLocal}}/api/categorias
 Content-type: application/json
 
  {
-    "title":"cafe"
+    "title":"galletas"
  }
 
 
