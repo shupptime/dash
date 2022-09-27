@@ -17,35 +17,51 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // hook
-import { useRouter } from "next/router";
+import { query ,useRouter } from "next/router";
 
 export default function Login() {
 
   const router = useRouter();
   const theme = createTheme();
-  const [cuerpo, setCuerpo] = useState({ name: '', price: '', img: '', categoryId: '' });
+  const [cuerpo, setCuerpo] = useState({_id: '',  name: '', price: '', image: '', categoryId: '' });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    createProduct();
+    updateProduct();
   };
    
-  const createProduct = async () => {
+  const updateProduct = async () => {
     try {
-        const res = await fetch("http://localhost:3000/api/productos", {
-            method: "POST",
+        const { _id, name , price , image, categoryId } = cuerpo;
+        const res = await fetch("http://localhost:3000/api/productos/" + _id, {
+            method: "PUT",
             headers: {
             "Content-Type": "application/json",
             },
-            body: JSON.stringify(cuerpo),
+            body: JSON.stringify({ name , price , image, categoryId }),
       });
 
       console.log("res.status: ", res.status);
-      router.push("/dashboard/productos");
+
+      router.push(`/dashboard/productos/${categoryId}/edit`);
     } catch (error) {
       console.error(error);
     }
   };
+
+  const getProducto = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/api/productos/" + query.id);
+      const producto = await res.json();
+      setCuerpo(producto);
+    } catch (error) {
+      console.log("message: ", error)
+    }
+    }   
+
+  useEffect(() => {
+    if (query.id) getProducto();
+    }, []);
 
   return (
     <Layout>
@@ -64,9 +80,25 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Agregar 
+            Editar Producto 
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="id"
+              label="id"
+              autoComplete="id"
+              autoFocus
+              value={cuerpo._id}
+              disabled
+              onChange={(e) =>
+                setCuerpo({
+                  ...cuerpo,
+                  id: e.target.value,
+                })}
+            />
             <TextField
               margin="normal"
               required
@@ -76,6 +108,7 @@ export default function Login() {
               name="name"
               autoComplete="name"
               autoFocus
+              value={cuerpo.name}
               onChange={(e) =>
                 setCuerpo({
                   ...cuerpo,
@@ -88,13 +121,14 @@ export default function Login() {
               fullWidth
               name="img"
               label="Img"
-              type="img"
+              // type="img"
               id="img"
               autoComplete="img"
+              value={cuerpo.image}
               onChange={(e) =>
                 setCuerpo({
                   ...cuerpo,
-                  img: e.target.value,
+                  image: e.target.value,
                 })}
             />
              <TextField
@@ -106,6 +140,7 @@ export default function Login() {
               name="price"
               autoComplete="price"
               autoFocus
+              value={cuerpo.price}
               onChange={(e) =>
                 setCuerpo({
                   ...cuerpo,
@@ -121,6 +156,7 @@ export default function Login() {
               name="categoryId"
               autoComplete="categoryId"
               autoFocus
+              value={cuerpo.categoryId}
               onChange={(e) =>
                 setCuerpo({
                   ...cuerpo,
@@ -137,7 +173,7 @@ export default function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Add
+              Actualizar
             </Button>
           </Box>
         </Box>

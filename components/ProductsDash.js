@@ -1,4 +1,4 @@
-import * as React from 'react';
+import axios from "axios";
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper';
@@ -18,30 +18,31 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 //hook
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { fontSize } from '@mui/system';
-import useQuiosco from "../hooks/useQuiosco";
+import { query, useRouter } from "next/router";
 
 //en el hook esta producto tambien . ver cual va sino cambiar nombre.
 function MainFeaturedPost({ producto }) { 
+
   const matches = useMediaQuery('(max-width:600px)');
-
-  const nombre = 'ricardo';
-  const precio = 3;
-
-  const { handleChangeModal, handleAgregarPedido, handleEliminarProducto, pedido } = useQuiosco();
+  const { name, price, categoryId, image, _id} = producto;
   const [cantidad, setCantidad] = useState(1);
   const [edicion, setEdicion] = useState(false);
+  const router = useRouter();
 
+
+  const handleDelete = async (_id) => {
+    try {
+      const res = await axios.delete("/api/productos/" + _id);
   
-  useEffect(() => {
-    if (pedido.some((pedidoState) => pedidoState.id === producto.id)) {
-      const productoEdicion = pedido.find(
-        (pedidoState) => pedidoState.id === producto.id
-      );
-      setEdicion(true);
-      setCantidad(productoEdicion.cantidad);
+    if (res.status === 204) {
+      router.push(`/dashboard/productos/${query.id}/edit`); 
+    } 
+    // router.push("/dashboard/categorias");
+
+    } catch (error) {
+      console.log("msg:", error)
     }
-  }, [producto, pedido]);
+  }
 
   return (
     <Paper
@@ -63,14 +64,7 @@ function MainFeaturedPost({ producto }) {
         marginLeft: '-35px'
       }}
     >
-      {/* Increase the priority of the hero background image */}
-      
-     {/* <CardMedia
-        component="img"
-        height="140"
-        image="https://s3-eu-central-1.amazonaws.com/www.burgerking.com.ar.v2/wp-media-folder-burger-king-argentina//home/ubuntu/preview/menu-app/frontend/apps/marketing-website-wordpress-app/web/app/uploads/sites/5/ExtraBurger-XL.png"
-        alt="green iguana"
-      />  */}
+  
       <Box
         sx={{
           position: 'absolute',
@@ -95,10 +89,10 @@ function MainFeaturedPost({ producto }) {
             }}
           >
             <Typography component="h1" variant="h3" color="inherit" gutterBottom sx = { matches ? { fontSize: "16px", maxWidth: '90%'} : ''}> {/*  width: '85%' */}
-              {nombre}
+              {name}
             </Typography>
             <Typography variant="h5" color="inherit" paragraph sx = { matches ? { fontSize: "15px"} : ''}>
-              {precio}
+              {price}
             </Typography>
             {/* <Link variant="subtitle1" href="#">
               aca link ?
@@ -136,14 +130,14 @@ function MainFeaturedPost({ producto }) {
               <Button
                sx = {{ background:'radial-gradient(black, transparent)', width: '35px', height: '35px', marginLeft: '5px', fontSize: "11px"}}
                 variant="contained" size="small"
-                onClick={() => handleAgregarPedido({ ...producto, cantidad })}
+                onClick={() => router.push(`/dashboard/productos/${_id}/editProduct`)}
               >
-                {edicion ? "Editar" : "Agregar"}
+                Editar
               </Button> 
               <Button
                  sx = {{ background:'radial-gradient(red, transparent)', width: '35px', height: '35px', marginLeft: '5px', fontSize: "11px"}}
                 variant="contained" size="small"
-                onClick={() =>handleEliminarProducto(producto.id)}
+                onClick={ ()=> { handleDelete(_id) }} 
               >
                 eliminar
               </Button> 

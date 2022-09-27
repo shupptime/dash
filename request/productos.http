@@ -10,10 +10,10 @@ POST {{apiLocal}}/api/productos
 Content-type: application/json
 
  {
-    "name": "mela tapia",
-    "price": 5,
-    "image": "andre",
-    "categoryId": 8
+    "name": "hamburguesa doble",
+    "price": 569,
+    "image": "5",
+    "categoryId": "632e59669b026568ad8abbce"
  }
 
 

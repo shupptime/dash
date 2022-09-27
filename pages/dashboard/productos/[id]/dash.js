@@ -4,18 +4,13 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
 
 //component
-import Navbar from '../../../components/Navbar';
-import ProductsDash from '../../../components/ProductsDash';
-
+import Navbar from '../../../../components/Navbar';
+// import ProductsDash from '../../../components/ProductsDash';
 
 // hook
-import { useRouter } from "next/router";
+import { query, useRouter } from "next/router";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -34,6 +29,7 @@ const style = {
 
 export default function Products({categoria}) {
     const router = useRouter();
+
   return (
     <>
         <Navbar />
@@ -41,30 +37,30 @@ export default function Products({categoria}) {
         <Box sx={{ flexGrow: 1, padding: "3pc", marginTop:"45px"}}>
             
             <Typography variant="h4" sx={{ mb: 5, textAlign: 'center' }}>
-                Elige una Categoria
+                Opciones
             </Typography>
-            
-            {/* <ProductsDash key={3} /> */}
-            <List sx={style}  component="nav" aria-label="mailbox folders">
-                {
-                    categoria.map((cat) => (
-                    <div key = {cat._id} > 
-                        <ListItem button> 
-                            <ListItemText 
-                              style={{ textAlign: 'center'}} 
-                              primary={cat.title}  
-                              onClick={ ()=> { router.push(`/dashboard/productos/${cat._id}/dash`) }} />
-                        </ListItem>
-                        <Divider />
-                    </div>
-                    ))
-                }
-        </List>
+            <Button 
+                sx = {{ background:'radial-gradient(orange, transparent)', marginTop: '50px', marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
+                variant="contained" 
+                size="large"
+                onClick={ ()=> { router.push(`/dashboard/productos/${query.id}/add`) }}
+            >
+                Crear
+            </Button>
+            <Button 
+                sx = {{ background:'radial-gradient(orange, transparent)', marginTop: '50px', marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
+                variant="contained" 
+                size="large"
+                onClick={ ()=> { router.push(`/dashboard/productos/${query.id}/edit`) }}
+            >
+                Lista&Editar
+            </Button>
             
             <Button 
                 sx = {{ background:'radial-gradient(orange, transparent)', marginTop: '50px', marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
-                variant="contained" size="large"
-                onClick={ ()=> { router.push(`/dashboard`) }}
+                variant="contained" 
+                size="large"
+                onClick={ ()=> { router.push(`/dashboard/productos`) }}
             >
                 Volver
             </Button>   

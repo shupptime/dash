@@ -1,127 +1,102 @@
-
-import axios from "axios";
-import Layout from '../../../../layout/Layout';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
+import * as React from 'react';
+import { useState, useEffect } from "react";
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+
+//component
+import Navbar from '../../../../components/Navbar';
+import ProductsDash from '../../../../components/ProductsDash';
 
 // hook
-import { useRouter } from "next/router";
+import { query, useRouter } from "next/router";
+import { ConstructionOutlined } from '@mui/icons-material';
 
-export default function Login() {
+const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
 
-  const router = useRouter();
-  const theme = createTheme();
+const style = {
+    width: '100%',
+    maxWidth: 360,
+    bgcolor: 'background.paper',
+    marginTop: '50px',
+    };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
 
-    /* const res = await axios.post("/api/auth/login", credentials);
-    console.log(res);
-
-    if (res.status === 200) {
-      router.push("/dashboard");
-    } */
-    router.push("/");
-  };
-      
+export default function Products({result, id}) {
+   const router = useRouter();
+   
   return (
-    <Layout>
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Edit Product
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-             <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              disabled
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+    <>
+        <Navbar />
+        
+        <Box sx={{ flexGrow: 1, padding: "3pc", marginTop:"45px"}}>
+            
+            <Typography variant="h4" sx={{ mb: 5, textAlign: 'center' }}>
+                  Edición Productos
+            </Typography>
+            
+            {
+              result.map( producto => (
+                <ProductsDash key = { producto._id } producto = {producto} />
+              ))
+            }
+
+            <Button 
+                sx = {{ background:'radial-gradient(orange, transparent)', marginTop: '50px', marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
+                variant="contained" size="large"
+                onClick={ ()=> { router.push(`/dashboard`) }}
             >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
+                Volver
+            </Button>   
+        
         </Box>
-      </Container>
-    </ThemeProvider>
-  
-     
-    </Layout>
- 
-  )
+    </>
+);
 }
+
+export async function getServerSideProps({ query: { id } }) {
+    const res = await fetch(`http://localhost:3000/api/productos`);
+  
+    if (res.status === 200) {
+      const producto = await res.json();
+
+    let result = [];
+    const _producto = producto.map( e => {
+    
+    if(e.categoryId === id){
+      result.push(e)
+    }
+
+    
+   });
+
+      return {
+        props: {
+          result,
+          id
+        },
+      };
+    }
+  
+    return {
+      props: {
+        error: {
+          statusCode: res.status,
+          statusText: "not table",
+        },
+      },
+    };
+  }
+
+  
