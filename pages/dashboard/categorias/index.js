@@ -88,10 +88,11 @@ export default function Home({categoria}) {
 }
 
 export async function getServerSideProps() {
-    const res = await fetch("http://localhost:3000/api/categorias");
     
-    if (res.status === 200) {
-      const categoria = await res.json();
+    const { data } = await axios('https://eat-ser.vercel.app/api/categorias')
+
+    if (true) {
+      const categoria = data
       return {
         props: {
           categoria,
