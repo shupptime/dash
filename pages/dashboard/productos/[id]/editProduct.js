@@ -39,6 +39,7 @@ export default function Login() {
             method: "PUT",
             headers: {
             "Content-Type": "application/json",
+            "Access-Control-Allow-Origin" : "no cors",
             },
             body: JSON.stringify({ name , price , image, categoryId }),
       });
@@ -58,7 +59,8 @@ export default function Login() {
 
   const getProducto = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/productos/" + query.id);
+      
+      const res = await fetch(`https://eat-ser.vercel.app/api/productos/${query.id}`);
       const producto = await res.json();
       setCuerpo(producto);
     } catch (error) {

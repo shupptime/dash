@@ -21,11 +21,11 @@ Content-type: application/json
 
 ###
 
-PUT {{apiLocal}}/api/categorias/6328dff140cdde1150b408a4
+PUT {{apiLocal}}/api/categorias/632e5af09b026568ad8abbe6
 Content-type: application/json
 
  {
-    "title":"XXXX"
+    "title":"donaas"
  }
 
 

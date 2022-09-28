@@ -1,9 +1,9 @@
-@api = https://zafirus-c.herokuapp.com
+@api = https://eat-ser.vercel.app/
 @apiLocal = http://localhost:3000
 
 
 ###
-GET {{apiLocal}}/api/productos
+GET {{api}}/api/productos/63349dc5f553fbfc64657df4
 
 ###
 POST {{api}}/api/productos
