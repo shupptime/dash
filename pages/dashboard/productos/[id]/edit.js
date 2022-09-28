@@ -36,7 +36,6 @@ const style = {
 
 export default function Products({result, id}) {
    const router = useRouter();
-   console.log("result:", result)
   return (
     <>
         <Navbar />

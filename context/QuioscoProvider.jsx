@@ -19,7 +19,8 @@ const QuioscoProvider = ({children}) => {
     const router = useRouter()
 
     const obtenerCategorias = async () => {
-        const { data } = await axios('/api/categorias')
+        try {
+          const { data } = await axios('/api/categorias')
         /* const data = [
             { 
             id: 1,
@@ -52,8 +53,11 @@ const QuioscoProvider = ({children}) => {
               nombre: "Galletas"
             }
         ] */
-        console.log(data)
+
         setCategorias(data)
+        } catch (error) {
+          console.error(error)
+        }
     }
     useEffect(() => {
         obtenerCategorias()

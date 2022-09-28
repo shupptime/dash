@@ -48,7 +48,7 @@ export default function Edit() {
       });
 
     
-      console.log("res.status: ", res.status);
+      // console.log("res.status: ", res.status);
       res.status == 200 ? toast.success('Categoria agregada!!') :  toast.error('Error!!')
       setTimeout(() => { 
         return router.push("/dashboard/categorias");
