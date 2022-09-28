@@ -24,7 +24,7 @@ export default function Home() {
       <Carrousel /> 
       {
           categorias.map( (categoria) => (
-            <MenuList key= {categoria.id} categoria ={categoria} />
+            <MenuList key= {categoria._id} categoria ={categoria} />
           ))
        }
     </Layout>

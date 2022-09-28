@@ -16,14 +16,15 @@ const style = {
 
 export default function ListDividers({categoria}) {
 
-  const { nombre, icono, id } = categoria;
+  // const { nombre, icono, id } = categoria;
+  const { title, _id } = categoria;
   const router = useRouter()
   const { handleClickCategoria } = useQuiosco();
   
   return (
     <List sx={style}  component="nav" aria-label="mailbox folders">
-      <ListItem button onClick={ ()=> {handleClickCategoria(id)}  }> 
-        <ListItemText primary={nombre} />
+      <ListItem button onClick={ ()=> {handleClickCategoria(_id)}  }> 
+        <ListItemText primary={title} />
       </ListItem>
       <Divider /> {/* light */}
     </List>

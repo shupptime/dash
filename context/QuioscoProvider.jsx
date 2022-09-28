@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext } from 'react'
-// import axios from 'axios'
+import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 
@@ -19,8 +19,8 @@ const QuioscoProvider = ({children}) => {
     const router = useRouter()
 
     const obtenerCategorias = async () => {
-        // const { data } = await axios('/api/categorias')
-        const data = [
+        const { data } = await axios('/api/categorias')
+        /* const data = [
             { 
             id: 1,
               icono: "cafe",
@@ -51,7 +51,8 @@ const QuioscoProvider = ({children}) => {
               icono: "galletas",
               nombre: "Galletas"
             }
-        ]
+        ] */
+        console.log(data)
         setCategorias(data)
     }
     useEffect(() => {
