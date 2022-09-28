@@ -21,7 +21,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Products() {
   const { categoriaActual, handleClickCategoria } = useQuiosco();
-  console.log("categoriaActual: --", categoriaActual)
+  // console.log("categoriaActual: --", categoriaActual)
 
   return (
     <>
@@ -29,7 +29,7 @@ export default function Products() {
       <Box sx={{ flexGrow: 1, padding: "3pc", marginTop:"45px"}}>
         <Grid container spacing={2}>
           {categoriaActual?.productos?.map((producto) => (
-              <Card key={producto.id} producto={producto} />
+              <Card key={producto._id} producto={producto} /> // id * _id
             ))}
         </Grid>
       </Box>

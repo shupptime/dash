@@ -24,7 +24,8 @@ import useQuiosco from "../hooks/useQuiosco";
 //en el hook esta producto tambien . ver cual va sino cambiar nombre.
 function MainFeaturedPost({ producto }) { 
   const matches = useMediaQuery('(max-width:600px)');
-  const { nombre, imagen, precio } = producto;
+  // const { nombre, imagen, precio } = producto;
+  const { name, image, price } = producto;
 
   const { handleChangeModal, handleAgregarPedido, pedido } = useQuiosco();
   const [cantidad, setCantidad] = useState(1);
@@ -32,9 +33,10 @@ function MainFeaturedPost({ producto }) {
 
   
   useEffect(() => {
-    if (pedido.some((pedidoState) => pedidoState.id === producto.id)) {
+    //TODO: Cambio a prod id * _id
+    if (pedido.some((pedidoState) => pedidoState._id === producto._id)) {
       const productoEdicion = pedido.find(
-        (pedidoState) => pedidoState.id === producto.id
+        (pedidoState) => pedidoState._id === producto._id
       );
       setEdicion(true);
       setCantidad(productoEdicion.cantidad);
@@ -88,10 +90,10 @@ function MainFeaturedPost({ producto }) {
             }}
           >
             <Typography component="h1" variant="h3" color="inherit" gutterBottom sx = { matches ? { fontSize: "18px", width: '85%'} : ''}>
-              {nombre}
+              {name}
             </Typography>
             <Typography variant="h5" color="inherit" paragraph sx = { matches ? { fontSize: "18px"} : ''}>
-              {precio}
+              {price}
             </Typography>
             {/* <Link variant="subtitle1" href="#">
               aca link ?

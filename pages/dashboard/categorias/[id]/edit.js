@@ -23,7 +23,7 @@ export default function Edit() {
 
   const getCategoria = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/categorias/" + query.id);
+      const res = await fetch("https://eat-ser.vercel.app/api/categorias/" + query.id);
       const categoria = await res.json();
 
       setTitle(categoria.title);

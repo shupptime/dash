@@ -14,14 +14,15 @@ const QuioscoProvider = ({children}) => {
     const [pedido, setPedido] = useState([])
     const [nombre, setNombre] = useState('')
     const [total, setTotal] = useState(0)
+    const [productosAux, setProductoAux] = useState([])
     let lista = 0 ;
 
     const router = useRouter()
 
     const obtenerCategorias = async () => {
         try {
-          const { data } = await axios('/api/categorias')
-        /* const data = [
+        const { data } = await axios('/api/categorias')
+       /*  const data = [
             { 
             id: 1,
               icono: "cafe",
@@ -59,13 +60,24 @@ const QuioscoProvider = ({children}) => {
           console.error(error)
         }
     }
+    
+    const obtenerProductoAux = async () => {
+      try {
+      const { data } = await axios('/api/productos')
+      setProductoAux(data)
+      } catch (error) {
+        console.error(error)
+      }
+  }
+
     useEffect(() => {
         obtenerCategorias()
     }, [])
 
     useEffect(() => {
+      
         // setCategoriaActual(categorias[0])
-        const productosAux = [
+        /* const productosAux = [
             {
                 id: 1,
                 nombre: "Café Caramel con Chocolate",
@@ -479,22 +491,23 @@ const QuioscoProvider = ({children}) => {
                 imagen: "pizzas_11",
                 categoriaId: 3
               }
-          ]
-        const productosEnCategoria = productosAux.filter( prod => prod.categoriaId === 1)
+          ] */
         
+        // TODO: cambia porpiedad category y se hizo un state para productoAux  
+        obtenerProductoAux()
+        const productosEnCategoria = productosAux.filter( prod => prod.categoryId === categorias[0]._id)
         const data = { categoria: categorias[0], productos: productosEnCategoria }
-    
+        
         setCategoriaActual(data)  
     }, [categorias])
 
     useEffect(() => {
-        const nuevoTotal = pedido.reduce((total, producto) => (producto.precio * producto.cantidad ) + total, 0)
-
+        const nuevoTotal = pedido.reduce((total, producto) => (producto.price * producto.cantidad ) + total, 0)
         setTotal(nuevoTotal)
     }, [pedido])
 
     const handleClickCategoria = id => {
-        const productosAux = [
+        /* const productosAux = [
             {
                 id: 1,
                 nombre: "Café Caramel con Chocolate",
@@ -908,11 +921,12 @@ const QuioscoProvider = ({children}) => {
                 imagen: "pizzas_11",
                 categoriaId: 3
               }
-          ]
-        const categoria = categorias.filter( cat => cat.id === id )
-        const productosEnCategoria = productosAux.filter( prod => prod.categoriaId === id)
-        // console.log("en click: ", productosEnCategoria);
+          ] */
         
+        obtenerProductoAux()
+        const categoria = categorias.filter( cat => cat._id === id )
+        const productosEnCategoria = productosAux.filter( prod => prod.categoryId === id)
+        // console.log("en click: ", productosEnCategoria);
         
         const data = { categoria: categoria[0], productos: productosEnCategoria }
         // setCategoriaActual(categoria[0]) --old version
@@ -928,10 +942,11 @@ const QuioscoProvider = ({children}) => {
         setModal(!modal)
     }
 
-    const handleAgregarPedido = ({categoriaId, ...producto}) => {
-        if(pedido.some(productoState => productoState.id === producto.id)) {
+    const handleAgregarPedido = ({categoryId, ...producto}) => {
+        if(pedido.some(productoState => productoState._id === producto._id)) {
            // Actualizar la cantidad
-           const pedidoActualizado = pedido.map(productoState => productoState.id === producto.id ? producto : productoState)
+           const pedidoActualizado = pedido.map(productoState => productoState._id === producto._id ? producto : productoState)
+           // console.log("pedidoActualizado:", pedidoActualizado);
            setPedido(pedidoActualizado)
 
            toast.success('Guardado Correctamente')
@@ -945,13 +960,13 @@ const QuioscoProvider = ({children}) => {
     }
 
     const handleEditarCantidades = id => {
-        const productoActualizar = pedido.filter( producto => producto.id === id)
+        const productoActualizar = pedido.filter( producto => producto._id === id)
         setProducto(productoActualizar[0])
         setModal(!modal)
     }
 
     const handleEliminarProducto = id => {
-        const pedidoActualizado = pedido.filter( producto => producto.id !== id)
+        const pedidoActualizado = pedido.filter( producto => producto._id !== id)
         setPedido(pedidoActualizado)
     }
 
@@ -959,11 +974,8 @@ const QuioscoProvider = ({children}) => {
         e.preventDefault();
 
         try {
-            // await axios.post('/api/ordenes', {pedido, nombre, total, fecha: Date.now().toString()})
-
-            // Resetear la app
-            // setCategoriaActual(categorias)
-            const productosAux = [
+            
+            /* const productosAux = [
                 {
                     id: 1,
                     nombre: "Café Caramel con Chocolate",
@@ -1377,8 +1389,10 @@ const QuioscoProvider = ({children}) => {
                     imagen: "pizzas_11",
                     categoriaId: 3
                   }
-              ]
-            const productosEnCategoria = productosAux.filter( prod => prod.categoriaId === 1)
+              ] */
+            
+            obtenerProductoAux()
+            const productosEnCategoria = productosAux.filter( prod => prod.categoryId === categorias[0]._id)
             
             const data = { categoria: categorias[0], productos: productosEnCategoria }
         
@@ -1386,6 +1400,7 @@ const QuioscoProvider = ({children}) => {
             setPedido([])
             setNombre('')
             setTotal(0)
+            nombre = 'XXXXXX'
 
 
             toast.success('Pedido Realizado Correctamente')
@@ -1396,7 +1411,7 @@ const QuioscoProvider = ({children}) => {
                 
                 pedido.forEach( e => {
                     //console.log("data:", e.nombre );
-                    infoPedido += '%20[%20*%20' + e.cantidad + '%20' + e.nombre + '%20]%20%20---'
+                    infoPedido += '%20[%20*%20' + e.cantidad + '%20' + e.name + '%20]%20%20---'
                 })
                 
                 // console.log("resultado", infoPedido);
@@ -1406,7 +1421,7 @@ const QuioscoProvider = ({children}) => {
                 
             }else {
                 setTimeout(() => {
-                    router.push( url + '%20'+ nombre + '%20y%20mi%20pedido%20es:%20'+ '%20[%20*%20' + pedido[0].cantidad + '%20' + pedido[0].nombre + '%20]%20%20---%20Total:%20$' + total.toFixed(2) );
+                    router.push( url + '%20'+ nombre + '%20y%20mi%20pedido%20es:%20'+ '%20[%20*%20' + pedido[0].cantidad + '%20' + pedido[0].name + '%20]%20%20---%20Total:%20$' + total.toFixed(2) );
                 }, 1000)
             }
             
