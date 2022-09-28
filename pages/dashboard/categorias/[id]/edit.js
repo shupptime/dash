@@ -8,6 +8,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { toast } from 'react-toastify'
 
 // hook
 import { query, useRouter } from "next/router";
@@ -46,9 +47,13 @@ export default function Edit() {
         body: JSON.stringify(_body),
       });
 
-      // const res = axios.put("http://localhost:3000/api/categorias/" + query.id, cuerpo);
+    
       console.log("res.status: ", res.status);
-      router.push("/dashboard/categorias/");
+      res.status == 200 ? toast.success('Categoria agregada!!') :  toast.error('Error!!')
+      setTimeout(() => { 
+        return router.push("/dashboard/categorias");
+    }, 2000)
+      
   } catch (error) {
     console.error(error);
   }
@@ -102,6 +107,15 @@ export default function Edit() {
               Editar
             </Button>
           </Box>
+          <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 1, mb: 2, color: 'red', background: 'white' }}
+              onClick={()=>{  router.push(`/dashboard/categorias`) }}
+            >
+              Volver
+            </Button>
         </Box>
       </Container>
     </ThemeProvider>

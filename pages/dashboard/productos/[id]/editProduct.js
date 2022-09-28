@@ -15,6 +15,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { toast } from 'react-toastify'
+
 
 // hook
 import { query ,useRouter } from "next/router";
@@ -42,10 +44,15 @@ export default function Login() {
       });
 
       console.log("res.status: ", res.status);
-
-      router.push(`/dashboard/productos/${categoryId}/edit`);
+      toast.success('Producto actualizado!!');
+      setTimeout(() => { 
+        return router.push(`/dashboard/productos/${categoryId}/edit`);
+    }, 2000)
+      
+      
     } catch (error) {
       console.error(error);
+      router.push(`/dashboard/productos/${categoryId}/edit`);
     }
   };
 
@@ -176,6 +183,15 @@ export default function Login() {
               Actualizar
             </Button>
           </Box>
+          <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 1, mb: 2, color:'red', background: 'white' }}
+              onClick={ ()=> {  router.push(`/dashboard/productos/${cuerpo.categoryId}/edit`) }}
+            >
+            Volver
+            </Button>
         </Box>
       </Container>
     </ThemeProvider>

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+import { toast } from 'react-toastify'
 
 // component
 import CardMedia from '@mui/material/CardMedia';
@@ -19,6 +20,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 //hook
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { query, useRouter } from "next/router";
+import { optimizeFonts } from "next.config";
 
 //en el hook esta producto tambien . ver cual va sino cambiar nombre.
 function MainFeaturedPost({ producto }) { 
@@ -35,12 +37,15 @@ function MainFeaturedPost({ producto }) {
       const res = await axios.delete("/api/productos/" + _id);
   
     if (res.status === 204) {
-      router.push(`/dashboard/productos/${query.id}/edit`); 
+      toast.success('Producto eliminado!!');
+      return router.push(`/dashboard/productos/${query.id}/edit`); 
     } 
-    // router.push("/dashboard/categorias");
 
+   
+    router.push(`/dashboard/productos/${query.id}/edit`);
     } catch (error) {
       console.log("msg:", error)
+      router.push(`/dashboard/productos/${query.id}/edit`);
     }
   }
 

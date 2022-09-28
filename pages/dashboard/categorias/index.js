@@ -8,6 +8,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { toast } from 'react-toastify'
 
 // hook
 import { useRouter } from "next/router";
@@ -29,6 +30,7 @@ export default function Home({categoria}) {
       const res = await axios.delete("/api/categorias/" + cat._id);
   
     if (res.status === 204) {
+      toast.success('Catagoria eliminada!!');
       router.push("/dashboard/categorias");
     } 
     router.push("/dashboard/categorias");
@@ -40,7 +42,7 @@ export default function Home({categoria}) {
     
   return (
     <Layout>
-        <Typography variant="h4" sx={{ marginTop: '-100px', textAlign: 'center' }}>
+        <Typography variant="h4" sx={{ marginTop: '80px', textAlign: 'center' }}>
           Categorias
         </Typography>
         
@@ -73,6 +75,13 @@ export default function Home({categoria}) {
         >
             Agregar
         </Button> 
+        <Button 
+          style = {{ background:'white', color:'red',  marginTop: '25px' ,marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
+          variant="contained" size="large"
+          onClick={ ()=> { router.push(`/dashboard`) }}
+        >
+            Volver
+        </Button>
     </Layout>
  
   )

@@ -35,7 +35,6 @@ const style = {
 
 export default function Products({result, id}) {
    const router = useRouter();
-   
   return (
     <>
         <Navbar />
@@ -46,16 +45,19 @@ export default function Products({result, id}) {
                   Edición Productos
             </Typography>
             
-            {
-              result.map( producto => (
-                <ProductsDash key = { producto._id } producto = {producto} />
-              ))
-            }
+            { result.length === 0 ?
+              ( <p style={{ textAlign: 'center' }}>No hay productos para editar</p>
+              ) : ( 
+                result.map( producto => (
+                  <ProductsDash key = { producto._id } producto = {producto} />
+                ))
+               ) 
+           }
 
             <Button 
                 sx = {{ background:'radial-gradient(orange, transparent)', marginTop: '50px', marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
                 variant="contained" size="large"
-                onClick={ ()=> { router.push(`/dashboard`) }}
+                onClick={ ()=> {  router.push(`/dashboard/productos/${query.id}/dash`) }}
             >
                 Volver
             </Button>   

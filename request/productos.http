@@ -18,14 +18,14 @@ Content-type: application/json
 
 
 ###
-PUT {{apiLocal}}/api/productos/6328df4640cdde1150b4089d
+PUT {{apiLocal}}/api/productos/6331e674b55387020b7f469e 
 Content-type: application/json
 
  {
-    "name": "xxxxx",
-    "price": 0,
-    "image": "xxxxxxxx",
-    "categoryId": 0
+    "name": "hamburguesas",
+    "price": 97,
+    "image": "3",
+    "categoryId": "632e59669b026568ad8abbce"
  }
 
 

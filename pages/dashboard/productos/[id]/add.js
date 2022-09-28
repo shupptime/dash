@@ -15,9 +15,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { toast } from 'react-toastify'
 
 // hook
-import { useRouter } from "next/router";
+import { query, useRouter } from "next/router";
 
 export default function Login() {
 
@@ -40,12 +41,19 @@ export default function Login() {
             body: JSON.stringify(cuerpo),
       });
 
-      console.log("res.status: ", res.status);
-      router.push("/dashboard/productos");
+        toast.success('Producto agregado!!');
+        setTimeout(() => { 
+          return router.push(`/dashboard/productos/${query.id}/edit`);
+      }, 2000)
+        
     } catch (error) {
+      toast.error('error en carga!!')
       console.error(error);
+      router.push(`/dashboard/productos/${query.id}/edit`);
+     
     }
   };
+
 
   return (
     <Layout>
@@ -121,6 +129,7 @@ export default function Login() {
               name="categoryId"
               autoComplete="categoryId"
               autoFocus
+              
               onChange={(e) =>
                 setCuerpo({
                   ...cuerpo,
@@ -140,6 +149,15 @@ export default function Login() {
               Add
             </Button>
           </Box>
+          <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 1, mb: 2, color: 'red', background: 'white' }}
+              onClick={()=>{  router.push(`/dashboard/productos/${query.id}/dash`) }}
+            >
+              Volver
+            </Button>
         </Box>
       </Container>
     </ThemeProvider>
