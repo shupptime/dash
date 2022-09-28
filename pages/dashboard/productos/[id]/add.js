@@ -33,7 +33,7 @@ export default function Login() {
    
   const createProduct = async () => {
     try {
-        const res = await fetch("http://localhost:3000/api/productos", {
+        const res = await fetch("https://eat-ser.vercel.app/api/productos", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",

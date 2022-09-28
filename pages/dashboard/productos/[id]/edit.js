@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -35,6 +36,7 @@ const style = {
 
 export default function Products({result, id}) {
    const router = useRouter();
+   console.log("result:", result)
   return (
     <>
         <Navbar />
@@ -68,10 +70,10 @@ export default function Products({result, id}) {
 }
 
 export async function getServerSideProps({ query: { id } }) {
-    const res = await fetch(`http://localhost:3000/api/productos`);
+    const {data} = await axios("https://eat-ser.vercel.app/api/productos");
   
-    if (res.status === 200) {
-      const producto = await res.json();
+    if (true) {
+      const producto = data;
 
     let result = [];
     const _producto = producto.map( e => {

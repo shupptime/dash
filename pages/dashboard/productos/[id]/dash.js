@@ -71,7 +71,7 @@ export default function Products({categoria}) {
 }
 
 export async function getServerSideProps() {
-    const res = await fetch("http://localhost:3000/api/categorias");
+    const res = await fetch("https://eat-ser.vercel.app/api/categorias");
     
     if (res.status === 200) {
       const categoria = await res.json();

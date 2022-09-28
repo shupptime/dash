@@ -35,7 +35,7 @@ export default function Login() {
   const updateProduct = async () => {
     try {
         const { _id, name , price , image, categoryId } = cuerpo;
-        const res = await fetch("http://localhost:3000/api/productos/" + _id, {
+        const res = await fetch("https://eat-ser.vercel.app/api/productos/" + _id, {
             method: "PUT",
             headers: {
             "Content-Type": "application/json",

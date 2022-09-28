@@ -6,7 +6,7 @@
 GET {{apiLocal}}/api/productos
 
 ###
-POST {{apiLocal}}/api/productos
+POST {{api}}/api/productos
 Content-type: application/json
 
  {

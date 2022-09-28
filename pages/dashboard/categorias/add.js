@@ -33,7 +33,7 @@ export default function Edit() {
     _body.title = title;
 
     try {
-        const res = await fetch("http://localhost:3000/api/categorias", {
+        const res = await fetch("https://eat-ser.vercel.app/api/categorias", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",

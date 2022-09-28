@@ -39,7 +39,7 @@ export default function Edit() {
     
     try{ 
       
-      const res = await fetch("http://localhost:3000/api/categorias/" + query.id, {
+      const res = await fetch("https://eat-ser.vercel.app/api/categorias/" + query.id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
