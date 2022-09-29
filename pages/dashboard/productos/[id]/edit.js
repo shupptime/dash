@@ -1,4 +1,3 @@
-import * as React from 'react';
 import axios from "axios";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -23,10 +22,10 @@ export default function Products({result}) {
                   Edición Productos
             </Typography>
             
-            { result.length === 0 ?
+            { result?.length === 0 ?
               ( <p style={{ textAlign: 'center' }}>No hay productos para editar</p>
               ) : ( 
-                result.map( producto => (
+                result?.map( producto => (
                   <ProductsDash key = { producto._id } producto = {producto} />
                 ))
                ) 
