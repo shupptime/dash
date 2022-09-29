@@ -6,10 +6,6 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
 
 //component
 import Navbar from '../../../../components/Navbar';
@@ -17,22 +13,6 @@ import ProductsDash from '../../../../components/ProductsDash';
 
 // hook
 import { query, useRouter } from "next/router";
-import { ConstructionOutlined } from '@mui/icons-material';
-
-const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
-
-const style = {
-    width: '100%',
-    maxWidth: 360,
-    bgcolor: 'background.paper',
-    marginTop: '50px',
-    };
-
 
 export default function Products({result, id}) {
    const router = useRouter();
@@ -92,14 +72,6 @@ export async function getServerSideProps({ query: { id } }) {
       };
     }
   
-    return {
-      props: {
-        error: {
-          statusCode: res.status,
-          statusText: "not table",
-        },
-      },
-    };
   }
 
   

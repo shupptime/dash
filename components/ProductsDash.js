@@ -1,15 +1,14 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import { toast } from 'react-toastify'
 
 // component
-import CardMedia from '@mui/material/CardMedia';
+
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 
@@ -20,7 +19,6 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 //hook
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { query, useRouter } from "next/router";
-import { optimizeFonts } from "next.config";
 
 //en el hook esta producto tambien . ver cual va sino cambiar nombre.
 function MainFeaturedPost({ producto }) { 
@@ -42,7 +40,7 @@ function MainFeaturedPost({ producto }) {
     } 
 
    
-    router.push(`/dashboard/productos/${query.id}/edit`);
+    return router.push(`/dashboard/productos/${query.id}/edit`);
     } catch (error) {
       console.log("msg:", error)
       router.push(`/dashboard/productos/${query.id}/edit`);
@@ -99,9 +97,6 @@ function MainFeaturedPost({ producto }) {
             <Typography variant="h5" color="inherit" paragraph sx = { matches ? { fontSize: "15px"} : ''}>
               {price}
             </Typography>
-            {/* <Link variant="subtitle1" href="#">
-              aca link ?
-            </Link> */}
             <div 
               style ={{ 
                 display: 'flex',
@@ -164,15 +159,5 @@ function MainFeaturedPost({ producto }) {
     </Paper>
   );
 }
-
-MainFeaturedPost.propTypes = {
-  post: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    imageText: PropTypes.string.isRequired,
-    linkText: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default MainFeaturedPost;

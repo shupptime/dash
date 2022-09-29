@@ -2,6 +2,7 @@ import Layout from '../../layout/Layout';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import logo from '../../public/vercel.svg';
+import FolderIcon from '@mui/icons-material/Folder';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -23,12 +24,11 @@ export default function Home() {
   return (
     <Layout>
        
-        <Avatar
-            alt="Remy Sharp"
-            src={ logo }
-            sx={{ width: 100, height: 100}}
-            style={{ alignItems: 'center' , marginTop: '-300px' }}
-         />
+      <Stack direction="row" spacing={2}>
+          <Avatar>
+            <FolderIcon />
+          </Avatar>
+      </Stack>
 
         <List sx={style}  component="nav" aria-label="mailbox folders">
            
