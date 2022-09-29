@@ -3,7 +3,6 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-import { useRouter } from 'next/router'
 
 // hooks
 import useQuiosco from "../hooks/useQuiosco";
@@ -18,7 +17,6 @@ export default function ListDividers({categoria}) {
 
   // const { nombre, icono, id } = categoria;
   const { title, _id } = categoria;
-  const router = useRouter()
   const { handleClickCategoria } = useQuiosco();
   
   return (

@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
 // component
-import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 
@@ -25,9 +22,9 @@ import useQuiosco from "../hooks/useQuiosco";
 function MainFeaturedPost({ producto }) { 
   const matches = useMediaQuery('(max-width:600px)');
   // const { nombre, imagen, precio } = producto;
-  const { name, image, price } = producto;
+  const { name, price } = producto;
 
-  const { handleChangeModal, handleAgregarPedido, pedido } = useQuiosco();
+  const { handleAgregarPedido, pedido } = useQuiosco();
   const [cantidad, setCantidad] = useState(1);
   const [edicion, setEdicion] = useState(false);
 
@@ -58,14 +55,6 @@ function MainFeaturedPost({ producto }) {
         backgroundImage: 'red',
       }}
     >
-      {/* Increase the priority of the hero background image */}
-      
-     {/* <CardMedia
-        component="img"
-        height="140"
-        image="https://s3-eu-central-1.amazonaws.com/www.burgerking.com.ar.v2/wp-media-folder-burger-king-argentina//home/ubuntu/preview/menu-app/frontend/apps/marketing-website-wordpress-app/web/app/uploads/sites/5/ExtraBurger-XL.png"
-        alt="green iguana"
-      />  */}
       <Box
         sx={{
           position: 'absolute',
@@ -95,9 +84,7 @@ function MainFeaturedPost({ producto }) {
             <Typography variant="h5" color="inherit" paragraph sx = { matches ? { fontSize: "18px"} : ''}>
               {price}
             </Typography>
-            {/* <Link variant="subtitle1" href="#">
-              aca link ?
-            </Link> */}
+
             <div 
               style ={{ 
                 display: 'flex',
@@ -150,15 +137,5 @@ function MainFeaturedPost({ producto }) {
     </Paper>
   );
 }
-
-MainFeaturedPost.propTypes = {
-  post: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    imageText: PropTypes.string.isRequired,
-    linkText: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default MainFeaturedPost;

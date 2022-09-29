@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -24,9 +23,9 @@ import { query, useRouter } from "next/router";
 function MainFeaturedPost({ producto }) { 
 
   const matches = useMediaQuery('(max-width:600px)');
-  const { name, price, categoryId, image, _id} = producto;
+  const { name, price, _id} = producto;
   const [cantidad, setCantidad] = useState(1);
-  const [edicion, setEdicion] = useState(false);
+  // const [edicion, setEdicion] = useState(false);
   const router = useRouter();
 
 
@@ -36,10 +35,10 @@ function MainFeaturedPost({ producto }) {
   
     if (res.status === 204) {
       toast.success('Producto eliminado!!');
-      return router.push(`/dashboard/productos/${query.id}/edit`); 
+      router.push(`/dashboard/productos/${query.id}/edit`); 
+      return true
     } 
 
-   
     return router.push(`/dashboard/productos/${query.id}/edit`);
     } catch (error) {
       console.log("msg:", error)

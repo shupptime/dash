@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
 // component
@@ -18,7 +16,6 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 //hook
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { fontSize } from '@mui/system';
 import useQuiosco from "../hooks/useQuiosco";
 
 //en el hook esta producto tambien . ver cual va sino cambiar nombre.
@@ -63,14 +60,6 @@ function MainFeaturedPost({ producto }) {
         marginLeft: '-35px'
       }}
     >
-      {/* Increase the priority of the hero background image */}
-      
-     {/* <CardMedia
-        component="img"
-        height="140"
-        image="https://s3-eu-central-1.amazonaws.com/www.burgerking.com.ar.v2/wp-media-folder-burger-king-argentina//home/ubuntu/preview/menu-app/frontend/apps/marketing-website-wordpress-app/web/app/uploads/sites/5/ExtraBurger-XL.png"
-        alt="green iguana"
-      />  */}
       <Box
         sx={{
           position: 'absolute',
@@ -100,9 +89,6 @@ function MainFeaturedPost({ producto }) {
             <Typography variant="h5" color="inherit" paragraph sx = { matches ? { fontSize: "15px"} : ''}>
               {price}
             </Typography>
-            {/* <Link variant="subtitle1" href="#">
-              aca link ?
-            </Link> */}
             <div 
               style ={{ 
                 display: 'flex',
@@ -165,15 +151,5 @@ function MainFeaturedPost({ producto }) {
     </Paper>
   );
 }
-
-MainFeaturedPost.propTypes = {
-  post: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    imageText: PropTypes.string.isRequired,
-    linkText: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default MainFeaturedPost;

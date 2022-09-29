@@ -1,9 +1,6 @@
 import * as React from 'react';
-import { useState, useEffect } from "react";
 import axios from "axios";
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
@@ -14,7 +11,7 @@ import ProductsDash from '../../../../components/ProductsDash';
 // hook
 import { query, useRouter } from "next/router";
 
-export default function Products({result, id}) {
+export default function Products({result}) {
    const router = useRouter();
   return (
     <>
@@ -67,7 +64,6 @@ export async function getServerSideProps({ query: { id } }) {
       return {
         props: {
           result,
-          id
         },
       };
     }
