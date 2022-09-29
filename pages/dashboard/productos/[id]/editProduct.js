@@ -1,15 +1,13 @@
-
-import axios from "axios";
 import { useState, useEffect } from "react";
 import Layout from '../../../../layout/Layout';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -25,6 +23,8 @@ export default function Login() {
 
   const router = useRouter();
   const theme = createTheme();
+  const [aux, setAux] = useState("");
+  const [ categorias , setCategorias] = useState([])
   const [cuerpo, setCuerpo] = useState({_id: '',  name: '', price: '', image: '', categoryId: '' });
 
   const handleSubmit = async (event) => {
@@ -35,7 +35,8 @@ export default function Login() {
   const updateProduct = async () => {
     try {
         const { _id, name , price , image, categoryId } = cuerpo;
-        const res = await fetch("https://eat-ser.vercel.app/api/productos/" + _id, {
+
+        const res = await fetch("http://eat-ser.vercel.app/api/productos/" + _id, {
             method: "PUT",
             headers: {
             "Content-Type": "application/json",
@@ -57,12 +58,24 @@ export default function Login() {
     }
   };
 
+  const getCategorias = async () => {
+    try {
+      
+      const res = await fetch(`https://eat-ser.vercel.app/api/categorias`);
+      const categorias = await res.json();
+      setCategorias(categorias);
+    } catch (error) {
+      console.log("message: ", error)
+    }
+    }  
+
   const getProducto = async () => {
     try {
       
       const res = await fetch(`https://eat-ser.vercel.app/api/productos/${query.id}`);
       const producto = await res.json();
       setCuerpo(producto);
+      getCategorias()
     } catch (error) {
       console.log("message: ", error)
     }
@@ -99,9 +112,9 @@ export default function Login() {
               id="id"
               label="id"
               autoComplete="id"
-              autoFocus
               value={cuerpo._id}
               disabled
+              style={{ display: 'none'}}
               onChange={(e) =>
                 setCuerpo({
                   ...cuerpo,
@@ -116,7 +129,6 @@ export default function Login() {
               label="Name"
               name="name"
               autoComplete="name"
-              autoFocus
               value={cuerpo.name}
               onChange={(e) =>
                 setCuerpo({
@@ -156,7 +168,7 @@ export default function Login() {
                   price: e.target.value,
                 })}
             />
-            <TextField
+            {/* <TextField
               margin="normal"
               required
               fullWidth
@@ -164,18 +176,41 @@ export default function Login() {
               label="categoryId"
               name="categoryId"
               autoComplete="categoryId"
-              autoFocus
+              
               value={cuerpo.categoryId}
               onChange={(e) =>
                 setCuerpo({
                   ...cuerpo,
                   categoryId: e.target.value,
                 })}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+            /> */}
+          <FormControl fullWidth>  
+             <InputLabel  style ={{margin: "15px", marginLeft: "2px" }} id="categoryId">categoria</InputLabel> 
+              <Select
+                labelId="categoryId"
+                // id="categoryId"
+                label="categoryId"
+                displayEmpty
+                value={cuerpo.categoryId}
+                // inputProps={{ 'aria-label': 'Without label' }}
+                sx={{ mt: 2, width: '100%' }} 
+                onChange={(e) =>
+                  setCuerpo({
+                    ...cuerpo,
+                    categoryId: e.target.value,
+                  })
+                
+                }
+              > 
+                {
+                  categorias.map( categoria => (
+                    <MenuItem key= {categoria._id} value={categoria.title}>{categoria.title}</MenuItem>
+                  ))
+                }
+                
+              </Select>
+            </FormControl> 
+        
             <Button
               type="submit"
               fullWidth

@@ -45,6 +45,7 @@ export default function Products({result}) {
 }
 
 export async function getServerSideProps({ query: { id } }) {
+    
     const {data} = await axios("https://eat-ser.vercel.app/api/productos");
   
     if (true) {
