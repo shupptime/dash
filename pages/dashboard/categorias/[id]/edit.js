@@ -24,10 +24,8 @@ export default function Edit() {
     try {
       const res = await fetch(`https://eat-ser.vercel.app/api/categorias/${ query.id}`);
       const categoria = await res.json();
-      setTitle(categoria.title);
-      if (res.status === 200) {
-         return router.push("/dashboard/categorias");
-      }
+      return setTitle(categoria.title);
+     
       
     } catch (error) {
       console.log("message: ", error)
