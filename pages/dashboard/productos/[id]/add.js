@@ -10,6 +10,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -25,6 +29,7 @@ export default function Login() {
   const router = useRouter();
   const theme = createTheme();
   const [cuerpo, setCuerpo] = useState({ name: '', price: '', img: '', categoryId: '' });
+  const [ categorias , setCategorias] = useState([])
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -53,7 +58,20 @@ export default function Login() {
      
     }
   };
+  const getCategorias = async () => {
+    try {
+      
+      const res = await fetch(`https://eat-ser.vercel.app/api/categorias`);
+      const categorias = await res.json();
+      setCategorias(categorias);
+    } catch (error) {
+      console.log("message: ", error)
+    }
+    }
 
+  useEffect(() => {
+    if (query.id) getCategorias();
+    }, []);
 
   return (
     <Layout>
@@ -120,7 +138,7 @@ export default function Login() {
                   price: e.target.value,
                 })}
             />
-            <TextField
+          {/*   <TextField
               margin="normal"
               required
               fullWidth
@@ -135,7 +153,33 @@ export default function Login() {
                   ...cuerpo,
                   categoryId: e.target.value,
                 })}
-            />
+            /> */}
+            <FormControl fullWidth>  
+             <InputLabel  style ={{margin: "15px", marginLeft: "2px" }} id="categoryId">categoria</InputLabel> 
+              <Select
+                labelId="categoryId"
+                // id="categoryId"
+                label="categoryId"
+                displayEmpty
+                value={cuerpo.categoryId}
+                // inputProps={{ 'aria-label': 'Without label' }}
+                sx={{ mt: 2, width: '100%' }} 
+                onChange={(e) =>
+                  setCuerpo({
+                    ...cuerpo,
+                    categoryId: e.target.value,
+                  })
+                
+                }
+              > 
+                {
+                  categorias.map( categoria => (
+                    <MenuItem key= {categoria._id} value={categoria._id}>{categoria.title}</MenuItem>
+                  ))
+                }
+                
+              </Select>
+            </FormControl> 
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"

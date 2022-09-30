@@ -204,7 +204,7 @@ export default function Login() {
               > 
                 {
                   categorias.map( categoria => (
-                    <MenuItem key= {categoria._id} value={categoria.title}>{categoria.title}</MenuItem>
+                    <MenuItem key= {categoria._id} value={categoria._id}>{categoria.title}</MenuItem>
                   ))
                 }
                 
