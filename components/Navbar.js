@@ -108,7 +108,7 @@ function DrawerAppBar(props) {
   const getCategorias = async () => {
     try {
       
-      const res = await fetch(`http://localhost:3000/api/categorias`);
+      const res = await fetch(`https://eat-ser.vercel.app/api/categorias`);
       const categorias = await res.json();
       setCategorias(categorias);
     } catch (error) {
