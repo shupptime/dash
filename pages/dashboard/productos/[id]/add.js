@@ -1,6 +1,7 @@
 
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
+import {useDropzone} from 'react-dropzone'
 import Layout from '../../../../layout/Layout';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -69,6 +70,18 @@ export default function Login() {
     }
     }
 
+    const onDrop = useCallback(acceptedFiles => {
+      // Do something with the files
+      console.log("diego:", acceptedFiles)
+      const formData = new FormData()
+      formData.append('image', acceptedFiles[0])
+      const { data } = axios.post('http://localhost:3000/api/img',formData )
+      console.log("DATAA", data)
+    }, [])
+
+
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+
   useEffect(() => {
     if (query.id) getCategorias();
     }, []);
@@ -93,6 +106,15 @@ export default function Login() {
             Agregar 
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+         
+               {/* <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                  {
+                    isDragActive ?
+                      <p>Drop the files here ...</p> :
+                      <p>Drag 'n' drop some files here, or click to select files</p>
+                  }
+              </div> */}
             <TextField
               margin="normal"
               required

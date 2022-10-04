@@ -71,8 +71,9 @@ function DrawerAppBar(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [ categorias , setCategorias] = React.useState([])
 
-  const { pedido, colocarOrden } = useQuiosco();
+  const { pedido, colocarOrden, handleClickCategoria} = useQuiosco();
   const router = useRouter()
 
   const drawer = (
@@ -82,10 +83,19 @@ function DrawerAppBar(props) {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}  onClick={ ()=>router.push('/')} >
-              <ListItemText primary={item} />
+        
+          <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center', color: 'blue' }}  onClick={ ()=>router.push('/')} >
+              <ListItemText primary={"Home"} />
+            </ListItemButton>
+          </ListItem>
+          <Divider style={{ width: '150px', marginLeft: '45px'}}/>
+          
+      
+         {categorias.map((item) => (
+          <ListItem key={item._id} disablePadding>
+            <ListItemButton sx={{ textAlign: 'center', color: 'gray' }}  onClick={ ()=> {handleClickCategoria(item._id)}  } >
+              <ListItemText primary={item.title} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -94,6 +104,20 @@ function DrawerAppBar(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
+ 
+  const getCategorias = async () => {
+    try {
+      
+      const res = await fetch(`http://localhost:3000/api/categorias`);
+      const categorias = await res.json();
+      setCategorias(categorias);
+    } catch (error) {
+      console.log("message: ", error)
+    }
+    }       
+    React.useEffect(() => {
+    getCategorias();
+    }, []);
 
   return (
     <Box sx={{ display: 'flex' }}>

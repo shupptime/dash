@@ -13,6 +13,7 @@ import CardResumenAux from '../components/CardResumenAux';
 
 //hook
 import useQuiosco from "../hooks/useQuiosco";
+import {useRouter } from "next/router";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -23,6 +24,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Products() {
     const { pedido, colocarOrden } = useQuiosco();
+    const router = useRouter();
 
   return (
     <>
@@ -45,20 +47,25 @@ export default function Products() {
                     { pedido.length !== 0 ? (
                         <>
                             <Button 
-                            sx = {{ background:'radial-gradient(orange, transparent)', marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
-                            variant="contained" size="large"
-                            // onClick={() =>handleEliminarProducto(producto.id)}
-                            onClick={colocarOrden}
+                                sx = {{ background:'radial-gradient(orange, transparent)', marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
+                                variant="contained" size="large"
+                                // onClick={() =>handleEliminarProducto(producto.id)}
+                                onClick={colocarOrden}
                             >
                             pedir
                             </Button> 
-                           {/*  <Button
-                            sx = {{ width: '90px', height: '55px', marginLeft: '15px', fontSize: "11px"}}
-                            variant="contained" size="large"
-                            onClick={() =>handleClose()}
+                            <Button 
+                                sx = {{ 
+                                    background:'radial-gradient(orange, transparent)',
+                                    marginLeft: '12px', width: '90%', 
+                                    height: '55px', fontSize: "15px",
+                                    color: 'red', background: 'white',mt: 3,
+                                }}
+                                variant="contained" size="large"
+                                onClick={()=>{  router.push(`/ProductsList`) }}
                             >
-                            Cancelar
-                            </Button> */}
+                            Volver
+                            </Button> 
                         </>
                         ) : <> </> 
                         }

@@ -78,11 +78,11 @@ function MainFeaturedPost({ producto }) {
               pr: { md: 0 },
             }}
           >
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom sx = { matches ? { fontSize: "18px", width: '85%'} : ''}>
+            <Typography component="h1" variant="h3" color="#353535" gutterBottom sx = { matches ? { fontSize: "22px", width: '85%'} : ''}>
               {name}
             </Typography>
-            <Typography variant="h5" color="inherit" paragraph sx = { matches ? { fontSize: "18px"} : ''}>
-              {price}
+            <Typography variant="h5" color="magenta" paragraph sx = { matches ? { fontSize: "18px"} : ''}>
+              $ {price}
             </Typography>
 
             <div 
