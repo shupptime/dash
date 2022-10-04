@@ -22,6 +22,9 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
   }));
 
+const images = [ {name: "doble.png"}, {name: "especial.png"}, {name: "triple.png"}]
+
+
 export default function Products() {
   const { categoriaActual, handleClickCategoria } = useQuiosco();
   // console.log("categoriaActual: --", categoriaActual)
@@ -36,7 +39,10 @@ export default function Products() {
         
         <Grid container spacing={2}>
           {categoriaActual?.productos?.map((producto) => (
-              <Card key={producto._id} producto={producto} /> // id * _id
+           
+              <Card key={producto._id} producto={producto}  /> // id * _id -PROD
+          
+              
             ))}
         </Grid>
         <Button

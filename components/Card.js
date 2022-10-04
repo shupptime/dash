@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 // component
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-
+import burga from '../public/doble.png';
 //incons
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -23,12 +23,11 @@ function MainFeaturedPost({ producto }) {
   const matches = useMediaQuery('(max-width:600px)');
   // const { nombre, imagen, precio } = producto;
   const { name, price } = producto;
-
   const { handleAgregarPedido, pedido } = useQuiosco();
   const [cantidad, setCantidad] = useState(1);
   const [edicion, setEdicion] = useState(false);
+  const imagetest = 'especial.png'
 
-  
   useEffect(() => {
     //TODO: Cambio a prod id * _id
     if (pedido.some((pedidoState) => pedidoState._id === producto._id)) {
@@ -78,7 +77,7 @@ function MainFeaturedPost({ producto }) {
               pr: { md: 0 },
             }}
           >
-            <Typography component="h1" variant="h3" color="#353535" gutterBottom sx = { matches ? { fontSize: "22px", width: '85%'} : ''}>
+            <Typography component="h1" variant="h3" color="#353535" gutterBottom sx = { matches ? { fontSize: "22px", width: '68%'} : ''}>
               {name}
             </Typography>
             <Typography variant="h5" color="magenta" paragraph sx = { matches ? { fontSize: "18px"} : ''}>
@@ -126,12 +125,20 @@ function MainFeaturedPost({ producto }) {
         </Grid>
         <Grid item md={6}>
         <img  style={ !matches ? { display: 'block', marginLeft: "100px", width: "350px", height:"250px" } : {display: 'flex',
-          marginLeft: "200px",
+          marginLeft: "187px",
+          width: "125px",
+          height: "115px",
+          marginTop: '-165px',
+          borderRadius: '103px',
+          marginRight:' 18px'} } 
+          src={ 'https://eat-ser.vercel.app/' + imagetest } 
+          /// src='https://s3-eu-central-1.amazonaws.com/www.burgerking.com.ar.v2/wp-media-folder-burger-king-argentina//home/ubuntu/preview/menu-app/frontend/apps/marketing-website-wordpress-app/web/app/uploads/sites/5/ExtraBurger-XL.png' alt="img" 
+          /> 
+        </Grid>
+        {/*  marginLeft: "200px",
           width: "125px",
           height: "133px",
-          marginTop: '-140px'} } 
-          src='https://s3-eu-central-1.amazonaws.com/www.burgerking.com.ar.v2/wp-media-folder-burger-king-argentina//home/ubuntu/preview/menu-app/frontend/apps/marketing-website-wordpress-app/web/app/uploads/sites/5/ExtraBurger-XL.png' alt="img" /> 
-        </Grid>
+          marginTop: '-140px'} */}
         
       </Grid>
     </Paper>
