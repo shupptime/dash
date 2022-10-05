@@ -28,6 +28,12 @@ function MainFeaturedPost({ producto }) {
   const [edicion, setEdicion] = useState(false);
   const imagetest = 'especial.png'
 
+  const handleClick = (cantidad) => {
+    console.log("en clik: :", cantidad)
+    handleAgregarPedido({ ...producto, cantidad })
+    
+  }
+
   useEffect(() => {
     //TODO: Cambio a prod id * _id
     if (pedido.some((pedidoState) => pedidoState._id === producto._id)) {
@@ -52,6 +58,7 @@ function MainFeaturedPost({ producto }) {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundImage: 'red',
+        height: '250px',
       }}
     >
       <Box
@@ -77,7 +84,7 @@ function MainFeaturedPost({ producto }) {
               pr: { md: 0 },
             }}
           >
-            <Typography component="h1" variant="h3" color="#353535" gutterBottom sx = { matches ? { fontSize: "22px", width: '68%'} : ''}>
+            <Typography component="h1" variant="h3" color="#353535" gutterBottom sx = { matches ? { fontSize: "22px", width: '100%'} : ''}>
               {name}
             </Typography>
             <Typography variant="h5" color="magenta" paragraph sx = { matches ? { fontSize: "18px"} : ''}>
@@ -88,7 +95,7 @@ function MainFeaturedPost({ producto }) {
               style ={{ 
                 display: 'flex',
                 position: 'relative',
-                marginLeft: '-15px'
+                marginLeft: '-15px',
               }}
             >
               <IconButton 
@@ -97,6 +104,8 @@ function MainFeaturedPost({ producto }) {
                 onClick={() => {
                   if (cantidad <= 1) return;
                   setCantidad(cantidad - 1);
+                  let aux = cantidad - 1 ;
+                  return handleAgregarPedido({ ...producto, cantidad: aux });
                 }}
               >
                 <RemoveCircleOutlineIcon />
@@ -107,34 +116,36 @@ function MainFeaturedPost({ producto }) {
                 type="button"
                 onClick={() => {
                   if (cantidad >= 5) return;
-                  setCantidad(cantidad + 1);
+                  setCantidad(cantidad + 1); // ? porq no suma
+                  let aux = cantidad + 1 ;
+                  return handleAgregarPedido({ ...producto, cantidad: aux });
                 }}
               >
                 <AddCircleOutlineIcon />
               </IconButton>
-              <Button
+             {/*  <Button
                 sx ={{ background:'radial-gradient(black, transparent)'}}
                 variant="contained" size="small"
-                onClick={() => handleAgregarPedido({ ...producto, cantidad })}
+                onClick={() => handleClick(cantidad) }
               >
                 {edicion ? "Editar" : "Agregar"}
-              </Button> 
+              </Button> */} 
             </div>
 
           </Box>
         </Grid>
-        <Grid item md={6}>
+        <div style={{ marginTop: '80px'}}>
         <img  style={ !matches ? { display: 'block', marginLeft: "100px", width: "350px", height:"250px" } : {display: 'flex',
           marginLeft: "187px",
           width: "125px",
           height: "115px",
           marginTop: '-165px',
-          borderRadius: '103px',
+          borderRadius: '18px',
           marginRight:' 18px'} } 
           src={ 'https://eat-ser.vercel.app/' + imagetest } 
           /// src='https://s3-eu-central-1.amazonaws.com/www.burgerking.com.ar.v2/wp-media-folder-burger-king-argentina//home/ubuntu/preview/menu-app/frontend/apps/marketing-website-wordpress-app/web/app/uploads/sites/5/ExtraBurger-XL.png' alt="img" 
           /> 
-        </Grid>
+        </div>
         {/*  marginLeft: "200px",
           width: "125px",
           height: "133px",

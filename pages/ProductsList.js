@@ -39,10 +39,7 @@ export default function Products() {
         
         <Grid container spacing={2}>
           {categoriaActual?.productos?.map((producto) => (
-           
               <Card key={producto._id} producto={producto}  /> // id * _id -PROD
-          
-              
             ))}
         </Grid>
         <Button

@@ -942,9 +942,11 @@ const QuioscoProvider = ({children}) => {
         setModal(!modal)
     }
 
-    const handleAgregarPedido = ({categoryId, ...producto}) => {
+    const handleAgregarPedido = ({ ...producto }) => {
+      console.log(" dentro producto ?:", producto)
         if(pedido.some(productoState => productoState._id === producto._id)) {
-           // Actualizar la cantidad
+           
+          // Actualizar la cantidad
            const pedidoActualizado = pedido.map(productoState => productoState._id === producto._id ? producto : productoState)
            // console.log("pedidoActualizado:", pedidoActualizado);
            setPedido(pedidoActualizado)
