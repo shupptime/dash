@@ -84,10 +84,10 @@ function MainFeaturedPost({ producto }) {
               pr: { md: 0 },
             }}
           >
-            <Typography component="h1" variant="h3" color="#353535" gutterBottom sx = { matches ? { fontSize: "22px", width: '100%'} : ''}>
+            <Typography component="h1" variant="h3" color="#353535" gutterBottom sx = { matches ? { fontSize: "23px", width: '100%'} : ''}>
               {name}
             </Typography>
-            <Typography variant="h5" color="magenta" paragraph sx = { matches ? { fontSize: "18px"} : ''}>
+            <Typography variant="h5" color="magenta" paragraph sx = { matches ? { fontSize: "22px", marginTop: '30px'} : ''}>
               $ {price}
             </Typography>
 
@@ -108,7 +108,7 @@ function MainFeaturedPost({ producto }) {
                   return handleAgregarPedido({ ...producto, cantidad: aux });
                 }}
               >
-                <RemoveCircleOutlineIcon />
+                <RemoveCircleOutlineIcon style={{ fontSize: '43px'}}/>
               </IconButton>
               <p>{cantidad}</p>
               <IconButton 
@@ -121,7 +121,7 @@ function MainFeaturedPost({ producto }) {
                   return handleAgregarPedido({ ...producto, cantidad: aux });
                 }}
               >
-                <AddCircleOutlineIcon />
+                <AddCircleOutlineIcon style={{ fontSize: '43px'}} />
               </IconButton>
              {/*  <Button
                 sx ={{ background:'radial-gradient(black, transparent)'}}
@@ -139,7 +139,7 @@ function MainFeaturedPost({ producto }) {
           marginLeft: "187px",
           width: "125px",
           height: "115px",
-          marginTop: '-165px',
+          marginTop: '-205px',
           borderRadius: '18px',
           marginRight:' 18px'} } 
           src={ 'https://eat-ser.vercel.app/' + imagetest } 
