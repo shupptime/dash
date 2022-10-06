@@ -110,7 +110,7 @@ function MainFeaturedPost({ producto }) {
               >
                 <RemoveCircleOutlineIcon style={{ fontSize: '43px'}}/>
               </IconButton>
-              <p>{cantidad}</p>
+              <p style = {{ fontSize: '20px'}}>{cantidad}</p>
               <IconButton 
                 aria-label="delete"
                 type="button"

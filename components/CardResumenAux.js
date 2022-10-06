@@ -94,12 +94,18 @@ function MainFeaturedPost({ producto }) {
               pr: { md: 0 },
             }}
           >
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom sx = { matches ? { fontSize: "16px", maxWidth: '90%'} : ''}> {/*  width: '85%' */}
+            <div style={{ display: 'flex'}}>
+            <Typography component="h1" variant="h3" color="inherit" gutterBottom sx = { matches ? { fontSize: "22px", width: '195px'} : ''}> {/*  width: '85%' */}
               {name}
             </Typography>
-            <Typography variant="h5" color="inherit" paragraph sx = { matches ? { fontSize: "15px"} : ''}>
-              {price}
-            </Typography>
+            <Button
+                 sx = {{ background:'radial-gradient(red, transparent)', width: '35px', height: '35px',  marginLeft:'55px', fontSize: "18px"}}
+                variant="contained" size="small"
+                onClick={() =>handleEliminarProducto(producto._id)}
+              >
+                X
+              </Button> 
+            </div>
             {/* <Link variant="subtitle1" href="#">
               aca link ?
             </Link> */}
@@ -107,7 +113,8 @@ function MainFeaturedPost({ producto }) {
               style ={{ 
                 display: 'flex',
                 position: 'relative',
-                marginLeft: '-15px',
+                marginLeft: '-5px',
+                marginTop: "15px",
               }}
             >
               <IconButton 
@@ -117,11 +124,13 @@ function MainFeaturedPost({ producto }) {
                 onClick={() => {
                   if (cantidad <= 1) return;
                   setCantidad(cantidad - 1);
+                  let aux = cantidad - 1 ;
+                  return handleAgregarPedido({ ...producto, cantidad: aux });
                 }}
               >
-                <RemoveCircleOutlineIcon />
+                <RemoveCircleOutlineIcon style={{ fontSize: '30px'}}/>
               </IconButton>
-              <p style = {{ marginTop: "6px"}}>{cantidad}</p>
+              <p style = {{ marginTop: "2px",  fontSize: '20px'}}>{cantidad}</p>
               <IconButton 
                 sx = {{ width: '35px', height: '35px'}}
                 aria-label="delete"
@@ -129,29 +138,33 @@ function MainFeaturedPost({ producto }) {
                 onClick={() => {
                   if (cantidad >= 5) return;
                   setCantidad(cantidad + 1);
+                  let aux = cantidad + 1 ;
+                  return handleAgregarPedido({ ...producto, cantidad: aux });
                 }}
               >
-                <AddCircleOutlineIcon />
+                <AddCircleOutlineIcon   style={{ fontSize: '30px'}}/>
+
               </IconButton>
-              <Button
+              <Typography 
+                variant="h5" 
+                color="magenta" 
+                paragraph 
+                sx = { matches ? { fontSize: "18px", marginLeft: '179px', marginTop: "6px",} : ''}>
+                $ {price}
+              </Typography>
+              {/* <Button
                sx = {{ background:'radial-gradient(black, transparent)', width: '35px', height: '35px', marginLeft: '5px', fontSize: "11px"}}
                 variant="contained" size="small"
                 onClick={() => handleAgregarPedido({ ...producto, cantidad })}
               >
                 {edicion ? "Editar" : "Agregar"}
-              </Button> 
-              <Button
-                 sx = {{ background:'radial-gradient(red, transparent)', width: '35px', height: '35px', marginLeft: '5px', fontSize: "11px"}}
-                variant="contained" size="small"
-                onClick={() =>handleEliminarProducto(producto._id)}
-              >
-                eliminar
-              </Button> 
+              </Button>  */}
+             
             </div>
 
           </Box>
         </Grid>
-        <Grid item md={6} >
+       {/*  <Grid item md={6} >
         <img  style={ !matches ? { display: 'block', marginLeft: "100px", width: "350px", height:"250px" } : {display: 'flex',
           marginLeft: "240px",
           width: "125px",
@@ -159,7 +172,7 @@ function MainFeaturedPost({ producto }) {
           marginTop: '-151px',
             }} 
           src='https://s3-eu-central-1.amazonaws.com/www.burgerking.com.ar.v2/wp-media-folder-burger-king-argentina//home/ubuntu/preview/menu-app/frontend/apps/marketing-website-wordpress-app/web/app/uploads/sites/5/ExtraBurger-XL.png' alt="img" /> 
-        </Grid>
+        </Grid> */}
         
       </Grid>
     </Paper>
