@@ -60,7 +60,7 @@ export default function Products({ categoria }) {
                     primary={cat.title}
                     onClick={() => { router.push(`/dashboard/productos/${cat._id}/dash`) }} />
                 </ListItem>
-                <Divider variant="middle" style={!matches ? { marginLeft: 650, marginRight: 650 } : { width: '90%' }} />
+                <Divider variant="middle" style={!matches ? { marginLeft: 450, marginRight: 450 } : { width: '90%' }} />
               </div>
             ))
           }
