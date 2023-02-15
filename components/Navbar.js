@@ -79,7 +79,7 @@ function DrawerAppBar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        Menu
       </Typography>
       <Divider />
       <List>
@@ -134,33 +134,33 @@ function DrawerAppBar(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            // sx={{ mr: 2, display: { sm: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography
+         {/*  <Typography
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
             MUI
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          </Typography> */}
+         {/*  <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Button key={item} sx={{ color: '#fff' }}>
                 {item}
               </Button>
             ))}
-          </Box>
-          <Box sx={{ marginLeft: '280px', display: { xs: 'block', sm: 'block' } }}>
+          </Box> */}
+          {/* <Box sx={{ marginLeft: '280px', display: { xs: 'block', sm: 'block' } }}>
               
-              <IconButton aria-label="cart" onClick={ ()=>router.push('/CarritoResumen') }> {/* () => { handleOpen() } */}
+              <IconButton aria-label="cart" onClick={ ()=>router.push('/CarritoResumen') }> {/* () => { handleOpen() } 
                 <StyledBadge badgeContent={  pedido.length } color="secondary">
                   <ShoppingCartIcon />
                 </StyledBadge>
               </IconButton>
            
-          </Box>
+          </Box> */}
           
           {/* Modal */}
           <Modal
@@ -224,7 +224,7 @@ function DrawerAppBar(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            /* display: { xs: 'block', sm: 'none' }, */
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >

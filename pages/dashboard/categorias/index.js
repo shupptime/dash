@@ -8,10 +8,13 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Table from '../../../components/Table'
 import { toast } from 'react-toastify'
 
 // hook
 import { useRouter } from "next/router";
+import { flexbox } from "@mui/system";
+
 
 const style = {
     width: '100%',
@@ -44,18 +47,18 @@ export default function Home({categoria}) {
     
   return (
     <Layout>
-        <Typography variant="h4" sx={{ marginTop: '80px', textAlign: 'center' }}>
+        <Typography variant="h4" sx={{ margin: '40px', textAlign: 'center' }}>
           Categorias
         </Typography>
-        
-        <List sx={style}  component="nav" aria-label="mailbox folders">
+        <Table categorias = {categoria} />
+        {/* <List sx={style}  component="nav" aria-label="mailbox folders">
            {
             categoria.map((cat) => (
              <div key = {cat._id}> 
               <ListItem button> 
                   <ListItemText primary={cat.title}  onClick={ ()=> { router.push(`/dashboard/categorias/${cat._id}/edit`) }} />
                   <Stack direction="row" spacing={1}>
-                    {/* <Chip label="primary" color="primary" variant="outlined" /> */}
+                    {/* <Chip label="primary" color="primary" variant="outlined" /> 
                     <Chip 
                       label="eliminar" 
                       color="success" 
@@ -65,11 +68,12 @@ export default function Home({categoria}) {
                       />
                    </Stack>
               </ListItem>
-              <Divider /> {/* light */}
+              <Divider /> 
             </div>
             ))
            }
-        </List>
+        </List> */}
+        <div style ={{ textAlign: 'center', display: 'flex', width: '70%' }}> 
         <Button 
           style = {{ background:'radial-gradient(orange, transparent)', marginTop: '25px' ,marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
           variant="contained" size="large"
@@ -84,6 +88,7 @@ export default function Home({categoria}) {
         >
             Volver
         </Button>
+        </div>
     </Layout>
  
   )
