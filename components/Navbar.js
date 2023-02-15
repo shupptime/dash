@@ -91,7 +91,7 @@ function DrawerAppBar(props) {
           </ListItem>
           <Divider style={{ width: '150px', marginLeft: '45px'}}/>
           <ListItem disablePadding>
-            <ListItemButton sx={{ textAlign: 'center', color: 'red' }}  onClick={ ()=>router.push('https://eat-ser.vercel.app/dashboard')} >
+            <ListItemButton sx={{ textAlign: 'center', color: 'red' }}  onClick={ ()=>router.push('/dashboard')} >
               <ListItemText primary={"Dashboard"} />
             </ListItemButton>
           </ListItem>
