@@ -4,7 +4,7 @@ import Layout from '../layout/Layout';
 import Animations from '../components/Animations';
 import Circular from '../components/Circular';
 
-//hook
+//hookkk
 import useQuiosco from '../hooks/useQuiosco';
 
 export default function Home() {
