@@ -20,9 +20,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import EditIcon from '@mui/icons-material/Edit';
 import { visuallyHidden } from '@mui/utils';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import { useRouter } from "next/router";
+
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -229,11 +231,19 @@ function EnhancedTableToolbar(props) {
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Delete">
-                    <IconButton onClick={ ()=> { handleDelete(catDelete) }}  >
-                        <DeleteIcon />
-                    </IconButton>
-                </Tooltip>
+                <div style= {{ display: 'flex'}}>
+                    <Tooltip title="Delete">
+                        <IconButton onClick={() => { handleDelete(catDelete) }}  >
+                            <DeleteIcon />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Edit">
+                        <IconButton onClick={() => { router.push(`/dashboard/categorias/${catDelete._id}/edit`) }}  >
+                            <EditIcon />
+                        </IconButton>
+                    </Tooltip>
+                </div>
+
             ) : (
                 <Tooltip title="Filter list">
                     <IconButton>
@@ -250,7 +260,7 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable({ categorias }) {
-    
+
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
@@ -264,9 +274,9 @@ export default function EnhancedTable({ categorias }) {
         setOrder(isAsc ? 'desc' : 'asc');
         setOrderBy(property);
     };
-    
+
     const handleSelectAllClick = (event) => {
-        
+
         if (event.target.checked) {
             const newSelected = rows.map((n) => n.name);
             setSelected(newSelected);
@@ -281,20 +291,20 @@ export default function EnhancedTable({ categorias }) {
         console.log("selectedIndex", selectedIndex)
         console.log("selected:", selected)
 
-       /*  if (selectedIndex === -1 && selected.length === 0) {
-            newSelected = newSelected.concat(selected, row.title);
-        } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1),
-            );
-        } */
+        /*  if (selectedIndex === -1 && selected.length === 0) {
+             newSelected = newSelected.concat(selected, row.title);
+         } else if (selectedIndex === 0) {
+             newSelected = newSelected.concat(selected.slice(1));
+         } else if (selectedIndex === selected.length - 1) {
+             newSelected = newSelected.concat(selected.slice(0, -1));
+         } else if (selectedIndex > 0) {
+             newSelected = newSelected.concat(
+                 selected.slice(0, selectedIndex),
+                 selected.slice(selectedIndex + 1),
+             );
+         } */
 
-        setSelected(newSelected.concat( row.title));
+        setSelected(newSelected.concat(row.title));
         setCatDelete(row)
     };
 
@@ -312,15 +322,15 @@ export default function EnhancedTable({ categorias }) {
     };
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
-    
+
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-        
+
     return (
         <Box sx={{ width: '100%' }}>
             <Paper sx={{ width: '100%', mb: 2 }}>
-                <EnhancedTableToolbar numSelected={selected.length} catDelete ={catDelete} />
+                <EnhancedTableToolbar numSelected={selected.length} catDelete={catDelete} />
                 <TableContainer>
                     <Table
                         sx={{ minWidth: 750 }}
@@ -352,7 +362,7 @@ export default function EnhancedTable({ categorias }) {
                                                 key={row.title}
                                                 selected={isItemSelected}
                                             >
-                                                <TableCell padding="checkbox">          
+                                                <TableCell padding="checkbox">
                                                     <Checkbox
                                                         color="primary"
                                                         checked={isItemSelected}
