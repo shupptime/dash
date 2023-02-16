@@ -47,7 +47,7 @@ export default function Home({categoria}) {
     
   return (
     <Layout>
-        <Typography variant="h4" sx={{ margin: '40px', textAlign: 'center' }}>
+        <Typography variant="h4" sx={{ margin: '62px', textAlign: 'center' }}>
           Categorias
         </Typography>
         <Table categorias = {categoria} />
