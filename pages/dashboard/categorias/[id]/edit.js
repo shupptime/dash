@@ -106,16 +106,16 @@ export default function Edit() {
                 Editar
               </Button>
               <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 1, mb: 2, color: 'red', background: 'white' }}
-              onClick={() => { router.push(`/dashboard/categorias`) }}
-            >
-              Volver
-            </Button>
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 1, mb: 2, color: 'red', background: 'white' }}
+                onClick={() => { router.push(`/dashboard/categorias`) }}
+              >
+                Volver
+              </Button>
             </Box>
-           
+
           </Box>
         </Container>
       </ThemeProvider>
