@@ -15,6 +15,7 @@ const QuioscoProvider = ({children}) => {
     const [nombre, setNombre] = useState('')
     const [total, setTotal] = useState(0)
     const [productosAux, setProductoAux] = useState([])
+    const [categoriaSelect, setCategoriaSelect] = useState({ _id: 1, title: "tu vieja"})
     let lista = 0 ;
 
     const router = useRouter()
@@ -1451,7 +1452,10 @@ const QuioscoProvider = ({children}) => {
                 nombre, 
                 setNombre,
                 colocarOrden,
-                total
+                total,
+                setCategoriaSelect,
+                categoriaSelect
+
             }}
         >
             {children}

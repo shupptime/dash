@@ -21,6 +21,7 @@ import ProductsDash from '../../../components/ProductsDash';
 
 // hook
 import { useRouter } from "next/router";
+import useQuiosco from '../../../hooks/useQuiosco';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -40,13 +41,15 @@ const style = {
 export default function Products({ categoria , productos}) {
   const router = useRouter();
   const matches = useMediaQuery('(max-width:600px)');
+  const { categoriaSelect } = useQuiosco();
+
   
   return (
     <Layout>
         <Typography variant="h4" sx={{ margin: '62px', textAlign: 'center' }}>
           Elige una Categoria
         </Typography>
-       <TableProduct categorias = {categoria} productos ={productos}/>
+       <TableProduct categorias = {categoria} productos ={productos} categoriaSelect = {categoriaSelect}/>
     </Layout>
         
   );

@@ -26,6 +26,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { visuallyHidden } from '@mui/utils';
 
+import useQuiosco from '../hooks/useQuiosco';
+let aux = 'vacio'
+
 function createData(name, calories, fat, carbs, protein) {
     return {
         name,
@@ -174,14 +177,17 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-    const { numSelected, categorias } = props;
+    const { numSelected, categorias, productos } = props;
     const [age, setAge] = React.useState('');
     const [cuerpo, setCuerpo] = React.useState({ _id: '', title: '' });
+    const { categoriaSelect, setCategoriaSelect} = useQuiosco();
+    console.log("cuerpo:", cuerpo._id)
 
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
-
+   
+    console.log("actual:", categoriaSelect)
+    aux = cuerpo._id
+    console.log("aux:", aux)
+    
     return (
         <Toolbar
             sx={{
@@ -225,32 +231,27 @@ function EnhancedTableToolbar(props) {
             ) : (
                 <Tooltip title="Filter list">
                     <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                        <InputLabel id="categorias">Categorias</InputLabel>
+                        <InputLabel id="categorias">categorias</InputLabel>
                         <Select
                             labelId="categorias"
                             id="demo-simple-select-standard"
-                            value={cuerpo.id}
                             onChange={(e) =>
                                 setCuerpo({
-                                    ...cuerpo,
-                                    _id: e.target.value,
+                                    _id: e.target.value._id,
+                                    title: e.target.value.title
                                 })
 
                             }
-                            // onChange={handleChange}
+
                             label="Age"
                         >
-                            {/* <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem> */}
+
                             {
                                 categorias.map(categoria => (
-                                    <MenuItem key={categoria._id} value={categoria._id}>{categoria.title}</MenuItem>
+                                    <MenuItem key={categoria._id} value={categoria}>{categoria.title }</MenuItem>
                                 ))
                             }
-                            {/* <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem> */}
+
                         </Select>
                     </FormControl>
                 </Tooltip>
@@ -263,7 +264,10 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable({ categorias, productos }) {
+// TODO: Tabla Principal
+export default function EnhancedTable({ categorias, productos, categoriaSelect }) {
+    console.log("categoriaSelect",categoriaSelect)
+    console.log("aux en principal: ", aux)
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
@@ -302,13 +306,13 @@ export default function EnhancedTable({ categorias, productos }) {
             newSelected = newSelected.concat(selected.slice(1));
         }  */
 
-        if(selected !== name){
-            
+        if (selected !== name) {
+
             return setSelected(name);
-        }else {
+        } else {
             return setSelected([]);
         }
-        
+
         /* else if (selectedIndex === selected.length - 1) {
             newSelected = newSelected.concat(selected.slice(0, -1));
         } else if (selectedIndex > 0) {
@@ -343,7 +347,7 @@ export default function EnhancedTable({ categorias, productos }) {
     return (
         <Box sx={{ width: '100%' }}>
             <Paper sx={{ width: '100%', mb: 2 }}>
-                <EnhancedTableToolbar numSelected={selected.length} categorias={categorias} />
+                <EnhancedTableToolbar numSelected={selected.length} categorias={categorias} productos={productos} />
                 <TableContainer>
                     <Table
                         sx={{ minWidth: 750 }}
