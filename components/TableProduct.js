@@ -181,12 +181,7 @@ function EnhancedTableToolbar(props) {
     const [age, setAge] = React.useState('');
     const [cuerpo, setCuerpo] = React.useState({ _id: '', title: '' });
     const { categoriaSelect, setCategoriaSelect} = useQuiosco();
-    console.log("cuerpo:", cuerpo._id)
-
    
-    console.log("actual:", categoriaSelect)
-    aux = cuerpo._id
-    console.log("aux:", aux)
     
     return (
         <Toolbar
@@ -266,14 +261,44 @@ EnhancedTableToolbar.propTypes = {
 
 // TODO: Tabla Principal
 export default function EnhancedTable({ categorias, productos, categoriaSelect }) {
-    console.log("categoriaSelect",categoriaSelect)
-    console.log("aux en principal: ", aux)
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const numSelected = 0;
+    const [cuerpo, setCuerpo] = React.useState({ _id: '', title: '' });
+    const [catSelect, setCatSelect] = React.useState([]);
+    const [aux, setAux] = React.useState([]);
+    console.log("catSelect inicio", catSelect)
+
+    const handleChanged = (e) => {
+        setCuerpo({
+            _id: e.target.value._id,
+            title: e.target.value.title
+        })
+
+        console.log("catSelect.length", catSelect.length)
+       /* if(catSelect.length > 0){                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         catSelect = aux;
+            
+        }             */                                                                                         
+        
+        let cat = [];
+        productos.map( (item) => {
+            
+            if(item.categoryId === e.target.value._id){
+               cat.push(item)
+                // console.log("catSelect; ", catSelect)
+                //setCatSelect(item)
+            }
+                       
+        })
+        setCatSelect(cat)
+            console.log("cat", catSelect)
+ 
+    }
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -293,34 +318,13 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const handleClick = (event, name) => {
         const selectedIndex = selected.indexOf(name);
         let newSelected = [];
-        console.log("selectedIndex", selectedIndex)
-        console.log("selected:", selected)
-        console.log("name", name)
-
-        /* if (selectedIndex === -1 && selected.length === 0) {
-            newSelected = newSelected.concat(selected, name);
-        } 
-
         
-        if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1));
-        }  */
-
         if (selected !== name) {
 
             return setSelected(name);
         } else {
             return setSelected([]);
         }
-
-        /* else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1),
-            );
-        } */
 
         setSelected(newSelected);
     };
@@ -347,7 +351,71 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     return (
         <Box sx={{ width: '100%' }}>
             <Paper sx={{ width: '100%', mb: 2 }}>
-                <EnhancedTableToolbar numSelected={selected.length} categorias={categorias} productos={productos} />
+                {/* <EnhancedTableToolbar numSelected={selected.length} categorias={categorias} productos={productos} /> */}
+                
+                <Toolbar
+            sx={{
+                pl: { sm: 2 },
+                pr: { xs: 1, sm: 1 },
+                ...(numSelected > 0 && {
+                    bgcolor: (theme) =>
+                        alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+                }),
+            }}
+        >
+            {numSelected > 0 ? (
+                <Typography
+                    sx={{ flex: '1 1 100%' }}
+                    color="inherit"
+                    variant="subtitle1"
+                    component="div"
+                >
+                    {numSelected} selected
+                </Typography>
+            ) : (
+
+                <Typography
+                    sx={{ flex: '1 1 100%' }}
+                    variant="h6"
+                    id="tableTitle"
+                    component="div"
+                >
+                    Nutrition
+                </Typography>
+
+
+            )}
+
+            {numSelected > 0 ? (
+                <Tooltip title="Delete">
+                    <IconButton>
+                        <DeleteIcon />
+                    </IconButton>
+                </Tooltip>
+            ) : (
+                <Tooltip title="Filter list">
+                    <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                        <InputLabel id="categorias">categorias</InputLabel>
+                        <Select
+                            labelId="categorias"
+                            id="demo-simple-select-standard"
+                            onChange={(e) => handleChanged(e)}
+
+                            label="Age"
+                        >
+
+                            {
+                                categorias.map(categoria => (
+                                    <MenuItem key={categoria._id} value={categoria}>{categoria.title }</MenuItem>
+                                ))
+                            }
+
+                        </Select>
+                    </FormControl>
+                </Tooltip>
+            )}
+        </Toolbar>
+
                 <TableContainer>
                     <Table
                         sx={{ minWidth: 750 }}
@@ -363,7 +431,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
                             rowCount={productos.length}
                         />
                         <TableBody>
-                            {stableSort(productos, getComparator(order, orderBy))
+                            {stableSort(catSelect, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((producto, index) => {
                                     const isItemSelected = isSelected(producto.name);
