@@ -231,7 +231,7 @@ function EnhancedTableToolbar(props) {
             )}
 
             {numSelected > 0 ? (
-                <div style= {{ display: 'flex'}}>
+                <div style={{ display: 'flex' }}>
                     <Tooltip title="Delete">
                         <IconButton onClick={() => { handleDelete(catDelete) }}  >
                             <DeleteIcon />

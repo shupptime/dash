@@ -19,6 +19,7 @@ import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -27,6 +28,8 @@ import Select from '@mui/material/Select';
 import { visuallyHidden } from '@mui/utils';
 
 import useQuiosco from '../hooks/useQuiosco';
+import { useRouter } from "next/router";
+
 let aux = 'vacio'
 
 function createData(name, calories, fat, carbs, protein) {
@@ -180,9 +183,9 @@ function EnhancedTableToolbar(props) {
     const { numSelected, categorias, productos } = props;
     const [age, setAge] = React.useState('');
     const [cuerpo, setCuerpo] = React.useState({ _id: '', title: '' });
-    const { categoriaSelect, setCategoriaSelect} = useQuiosco();
-   
-    
+    const { categoriaSelect, setCategoriaSelect } = useQuiosco();
+
+
     return (
         <Toolbar
             sx={{
@@ -243,7 +246,7 @@ function EnhancedTableToolbar(props) {
 
                             {
                                 categorias.map(categoria => (
-                                    <MenuItem key={categoria._id} value={categoria}>{categoria.title }</MenuItem>
+                                    <MenuItem key={categoria._id} value={categoria}>{categoria.title}</MenuItem>
                                 ))
                             }
 
@@ -270,6 +273,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const numSelected = 0;
     const [cuerpo, setCuerpo] = React.useState({ _id: '', title: '' });
     const [catSelect, setCatSelect] = React.useState([]);
+    const router = useRouter();
     const [aux, setAux] = React.useState([]);
     console.log("catSelect inicio", catSelect)
 
@@ -280,24 +284,24 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
         })
 
         console.log("catSelect.length", catSelect.length)
-       /* if(catSelect.length > 0){                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-         catSelect = aux;
-            
-        }             */                                                                                         
-        
+        /* if(catSelect.length > 0){                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+          catSelect = aux;
+             
+         }             */
+
         let cat = [];
-        productos.map( (item) => {
-            
-            if(item.categoryId === e.target.value._id){
-               cat.push(item)
+        productos.map((item) => {
+
+            if (item.categoryId === e.target.value._id) {
+                cat.push(item)
                 // console.log("catSelect; ", catSelect)
                 //setCatSelect(item)
             }
-                       
+
         })
         setCatSelect(cat)
-            console.log("cat", catSelect)
- 
+        console.log("cat", catSelect)
+
     }
 
     const handleRequestSort = (event, property) => {
@@ -318,7 +322,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const handleClick = (event, name) => {
         const selectedIndex = selected.indexOf(name);
         let newSelected = [];
-        
+
         if (selected !== name) {
 
             return setSelected(name);
@@ -352,69 +356,76 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
         <Box sx={{ width: '100%' }}>
             <Paper sx={{ width: '100%', mb: 2 }}>
                 {/* <EnhancedTableToolbar numSelected={selected.length} categorias={categorias} productos={productos} /> */}
-                
+
                 <Toolbar
-            sx={{
-                pl: { sm: 2 },
-                pr: { xs: 1, sm: 1 },
-                ...(numSelected > 0 && {
-                    bgcolor: (theme) =>
-                        alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-                }),
-            }}
-        >
-            {numSelected > 0 ? (
-                <Typography
-                    sx={{ flex: '1 1 100%' }}
-                    color="inherit"
-                    variant="subtitle1"
-                    component="div"
+                    sx={{
+                        pl: { sm: 2 },
+                        pr: { xs: 1, sm: 1 },
+                        ...(numSelected > 0 && {
+                            bgcolor: (theme) =>
+                                alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+                        }),
+                    }}
                 >
-                    {numSelected} selected
-                </Typography>
-            ) : (
-
-                <Typography
-                    sx={{ flex: '1 1 100%' }}
-                    variant="h6"
-                    id="tableTitle"
-                    component="div"
-                >
-                    Nutrition
-                </Typography>
-
-
-            )}
-
-            {numSelected > 0 ? (
-                <Tooltip title="Delete">
-                    <IconButton>
-                        <DeleteIcon />
-                    </IconButton>
-                </Tooltip>
-            ) : (
-                <Tooltip title="Filter list">
-                    <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                        <InputLabel id="categorias">categorias</InputLabel>
-                        <Select
-                            labelId="categorias"
-                            id="demo-simple-select-standard"
-                            onChange={(e) => handleChanged(e)}
-
-                            label="Age"
+                    {selected.length > 0 ? (
+                        <Typography
+                            sx={{ flex: '1 1 100%' }}
+                            color="inherit"
+                            variant="subtitle1"
+                            component="div"
                         >
+                            1 selected
+                        </Typography>
+                    ) : (
 
-                            {
-                                categorias.map(categoria => (
-                                    <MenuItem key={categoria._id} value={categoria}>{categoria.title }</MenuItem>
-                                ))
-                            }
+                        <Typography
+                            sx={{ flex: '1 1 100%' }}
+                            variant="h6"
+                            id="tableTitle"
+                            component="div"
+                        >
+                            choose a product...
+                        </Typography>
 
-                        </Select>
-                    </FormControl>
-                </Tooltip>
-            )}
-        </Toolbar>
+
+                    )}
+
+                    {selected.length > 0 ? (
+                        <>
+                            <Tooltip title="Delete">
+                                <IconButton>
+                                    <DeleteIcon />
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Edit">
+                                <IconButton onClick={() => { router.push(`/dashboard/productos/6335373c0f31fd4fb16ee358/editProduct`) }}>
+                                    <EditIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </>
+                    ) : (
+                        <Tooltip title="Filter list">
+                            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                                <InputLabel id="categorias">categorias</InputLabel>
+                                <Select
+                                    labelId="categorias"
+                                    id="demo-simple-select-standard"
+                                    onChange={(e) => handleChanged(e)}
+
+                                    label="Age"
+                                >
+
+                                    {
+                                        categorias.map(categoria => (
+                                            <MenuItem key={categoria._id} value={categoria}>{categoria.title}</MenuItem>
+                                        ))
+                                    }
+
+                                </Select>
+                            </FormControl>
+                        </Tooltip>
+                    )}
+                </Toolbar>
 
                 <TableContainer>
                     <Table
