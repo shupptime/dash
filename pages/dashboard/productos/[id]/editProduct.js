@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { toast } from 'react-toastify'
+import axios from 'axios'
 
 
 // hook
@@ -35,7 +36,8 @@ export default function Login() {
   const updateProduct = async () => {
     try {
       const { _id, name, price, image, categoryId } = cuerpo;
-
+      console.log("llega dato a acualizar:", cuerpo);
+      return toast.error('no permitido!!');
       const res = await fetch("https://eat-ser.vercel.app/api/productos/" + _id, {
         method: "PUT",
         headers: {
@@ -61,9 +63,8 @@ export default function Login() {
   const getCategorias = async () => {
     try {
 
-      const res = await fetch(`https://eat-ser.vercel.app/api/categorias`);
-      const categorias = await res.json();
-      setCategorias(categorias);
+      const {data} = await axios(`/api/categorias`);
+      setCategorias(data);
     } catch (error) {
       console.log("message: ", error)
     }
@@ -71,10 +72,9 @@ export default function Login() {
 
   const getProducto = async () => {
     try {
-      const res = await fetch(`https://eat-ser.vercel.app/api/productos/${query.id}`);
-      const producto = await res.json();
-
-      setCuerpo(producto);
+      const {data} = await axios(`/api/productos/${query.id}`);
+      
+      setCuerpo(data);
       getCategorias()
     } catch (error) {
       console.log("message: ", error)
@@ -225,7 +225,7 @@ export default function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 1, mb: 2, color: 'red', background: 'white' }}
-              onClick={() => { router.push(`/dashboard/productos/${cuerpo.categoryId}/edit`) }}
+              onClick={() => { router.push(`/dashboard/productos`) }}
             >
               Volver
             </Button>
