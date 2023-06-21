@@ -267,6 +267,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
+    const [editProducto, setEditProducto] = React.useState({});
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -276,6 +277,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const router = useRouter();
     const [aux, setAux] = React.useState([]);
     console.log("catSelect inicio", catSelect)
+    console.log("selected: ", selected)
 
     const handleChanged = (e) => {
         setCuerpo({
@@ -319,13 +321,13 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
         setSelected([]);
     };
 
-    const handleClick = (event, name) => {
-        const selectedIndex = selected.indexOf(name);
+    const handleClick = (event, producto) => {
+        const selectedIndex = selected.indexOf(producto.name);
         let newSelected = [];
 
-        if (selected !== name) {
-
-            return setSelected(name);
+        if (selected !== producto.name) {
+            setEditProducto(producto)
+            return setSelected(producto.name);
         } else {
             return setSelected([]);
         }
@@ -398,7 +400,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
                                 </IconButton>
                             </Tooltip>
                             <Tooltip title="Edit">
-                                <IconButton onClick={() => { router.push(`/dashboard/productos/6335373c0f31fd4fb16ee358/editProduct`) }}>
+                                <IconButton onClick={() => { router.push(`/dashboard/productos/${editProducto._id}/editProduct`) }}>
                                     <EditIcon />
                                 </IconButton>
                             </Tooltip>
@@ -451,7 +453,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={(event) => handleClick(event, producto.name)}
+                                            onClick={(event) => handleClick(event, producto)}
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
