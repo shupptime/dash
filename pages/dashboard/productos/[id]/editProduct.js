@@ -36,27 +36,28 @@ export default function Login() {
   const updateProduct = async () => {
     try {
       const { _id, name, price, image, categoryId } = cuerpo;
-      console.log("llega dato a acualizar:", cuerpo);
-      return toast.error('no permitido!!');
-      const res = await fetch("https://eat-ser.vercel.app/api/productos/" + _id, {
+      //console.log("llega dato a acualizar:", cuerpo);
+      //return toast.error('no permitido!!');
+      const res = await axios.put("/api/productos/" + _id, cuerpo);
+      /* const res = await fetch("https://eat-ser.vercel.app/api/productos/" + _id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "no cors",
         },
         body: JSON.stringify({ name, price, image, categoryId }),
-      });
+      }); */
 
       console.log("res.status: ", res.status);
       toast.success('Producto actualizado!!');
       setTimeout(() => {
-        return router.push(`/dashboard/productos/${categoryId}/edit`);
+        return router.push(`/dashboard/productos`);
       }, 2000)
 
 
     } catch (error) {
       console.error(error);
-      router.push(`/dashboard/productos/${categoryId}/edit`);
+      router.push(`/dashboard/productos/${query._id}/edit`);
     }
   };
 
