@@ -16,14 +16,42 @@ const QuioscoProvider = ({children}) => {
     const [total, setTotal] = useState(0)
     const [productosAux, setProductoAux] = useState([])
     const [orderByCategory, setOrd] = useState([])
+    const [ultProd, setUltProd] = useState([])
+
     let lista = 0 ;
 
     const router = useRouter()
+
+    //Obtiene productos de la ultima categoria sellecionada.
+    const obtieneUltProd = async (idCat) => {
+      try {
+        const {data} = await axios(`/api/productos`); 
+        // ultProd.push(data)
+        
+        // setUltProd([data])
+        // let a = data.find((e) => e.categoryId === idCat )
+        let a =[];
+        data.map( e => {
+          if(e.categoryId === idCat){
+            a.push(e)   
+          }
+      })
+      setUltProd(a)
+  
+      } catch (error) {
+        console.log("message: ", error)
+      }
+    }
     
     const obtenerProdPoCatActual = async () => {
       try {
-        const { data } = await axios('/api/productos')
-        setOrd(data)
+        const { data } = await axios('/api/productos');
+        //console.log("ultProd.length: ", ultProd.length)
+
+        if(ultProd.length > 0){
+          return setOrd(ultProd)
+        }
+        return setOrd(data)
         } catch (error) {
           console.error(error)
         }
@@ -82,7 +110,8 @@ const QuioscoProvider = ({children}) => {
 
     useEffect(() => {
         obtenerCategorias()
-    }, [])
+        obtenerProdPoCatActual()
+    }, [ultProd])
 
     useEffect(() => {
       
@@ -1463,11 +1492,14 @@ const QuioscoProvider = ({children}) => {
                 colocarOrden,
                 total,
                 obtenerProdPoCatActual,
-                orderByCategory
+                orderByCategory,
+                obtieneUltProd,
+                ultProd
 
             }}
         >
             {children}
+            
         </QuioscoContext.Provider>
     )
 }

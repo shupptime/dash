@@ -19,6 +19,7 @@ import axios from 'axios'
 
 // hook
 import { query, useRouter } from "next/router";
+import useQuiosco from '../../../../hooks/useQuiosco';
 
 export default function Login() {
 
@@ -27,6 +28,7 @@ export default function Login() {
   const [aux, setAux] = useState("");
   const [categorias, setCategorias] = useState([])
   const [cuerpo, setCuerpo] = useState({ _id: '', name: '', price: '', image: '', categoryId: '' });
+  const { obtieneUltProd  } = useQuiosco();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -77,6 +79,10 @@ export default function Login() {
       
       setCuerpo(data);
       getCategorias()
+
+      //Obtiene ultimo seleccionado
+      obtieneUltProd(data.categoryId)
+      
     } catch (error) {
       console.log("message: ", error)
     }

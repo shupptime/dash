@@ -185,9 +185,7 @@ function EnhancedTableToolbar(props) {
     const { numSelected, categorias, productos } = props;
     const [age, setAge] = React.useState('');
     const [cuerpo, setCuerpo] = React.useState({ _id: '', title: '' });
-    const { categoriaSelect, setCategoriaSelect } = useQuiosco();
-
-
+    
     return (
         <Toolbar
             sx={{
@@ -276,26 +274,18 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const numSelected = 0;
     const [cuerpo, setCuerpo] = React.useState({ _id: '', title: '' });
-    
-    const [catSelect, setCatSelect] = React.useState(productos);
+    const { orderByCategory, ultProd } = useQuiosco();
+    //Inicia tabla com productos no seleccionado y luego al usar una categoria queda asignado al inicio del componente
+    const [catSelect, setCatSelect] = React.useState(orderByCategory);
     const router = useRouter();
     const [aux, setAux] = React.useState([]);
-    
 
-    console.log("catSelect inicio", catSelect)
-    
-
+  
     const handleChanged = (e) => {
         setCuerpo({
             _id: e.target.value._id,
             title: e.target.value.title
         })
-
-        console.log("catSelect.length", catSelect.length)
-        /* if(catSelect.length > 0){                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-          catSelect = aux;
-             
-         }             */
 
         let cat = [];
         productos.map((item) => {
