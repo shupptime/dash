@@ -280,6 +280,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const [aux, setAux] = React.useState([]);
     console.log("catSelect inicio", catSelect)
     console.log("selected: ", selected)
+    console.log("categorias inicio:", categorias)
 
     const handleChanged = (e) => {
         setCuerpo({
@@ -426,7 +427,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
                             </Tooltip>
                         </>
                     ) : (
-                        <Tooltip title="Filter list">
+                        <Tooltip title="Filter list"> 
                             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                                 <InputLabel id="categorias">categorias</InputLabel>
                                 <Select
