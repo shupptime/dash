@@ -264,6 +264,7 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
+
 // TODO: Tabla Principal
 export default function EnhancedTable({ categorias, productos, categoriaSelect }) {
     const [order, setOrder] = React.useState('asc');
@@ -275,12 +276,14 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const numSelected = 0;
     const [cuerpo, setCuerpo] = React.useState({ _id: '', title: '' });
-    const [catSelect, setCatSelect] = React.useState([]);
+    
+    const [catSelect, setCatSelect] = React.useState(productos);
     const router = useRouter();
     const [aux, setAux] = React.useState([]);
+    
+
     console.log("catSelect inicio", catSelect)
-    console.log("selected: ", selected)
-    console.log("categorias inicio:", categorias)
+    
 
     const handleChanged = (e) => {
         setCuerpo({
@@ -470,7 +473,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
                                 .map((producto, index) => {
                                     const isItemSelected = isSelected(producto.name);
                                     const labelId = `enhanced-table-checkbox-${index}`;
-
+                                    
                                     return (
                                         <TableRow
                                             hover

@@ -15,10 +15,19 @@ const QuioscoProvider = ({children}) => {
     const [nombre, setNombre] = useState('')
     const [total, setTotal] = useState(0)
     const [productosAux, setProductoAux] = useState([])
-    const [categoriaSelect, setCategoriaSelect] = useState({ _id: 1, title: "tu vieja"})
+    const [orderByCategory, setOrd] = useState([])
     let lista = 0 ;
 
     const router = useRouter()
+    
+    const obtenerProdPoCatActual = async () => {
+      try {
+        const { data } = await axios('/api/productos')
+        setOrd(data)
+        } catch (error) {
+          console.error(error)
+        }
+    }
 
     const obtenerCategorias = async () => {
         try {
@@ -1453,8 +1462,8 @@ const QuioscoProvider = ({children}) => {
                 setNombre,
                 colocarOrden,
                 total,
-                setCategoriaSelect,
-                categoriaSelect
+                obtenerProdPoCatActual,
+                orderByCategory
 
             }}
         >
