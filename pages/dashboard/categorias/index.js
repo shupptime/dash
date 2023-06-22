@@ -30,8 +30,8 @@ export default function Home({categoria}) {
   const handleClick = async (cat) => {
 
     try {
-      toast.error('No permitido!!');
-      return router.push("/dashboard/categorias");
+      //toast.error('No permitido!!');
+      //return router.push("/dashboard/categorias");
       const res = await axios.delete("/api/categorias/" + cat._id);
   
     if (res.status === 204) {

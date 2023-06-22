@@ -50,6 +50,22 @@ export default function Products({ categoria , productos}) {
           Elige una Categoria
         </Typography>
        <TableProduct categorias = {categoria} productos ={productos} categoriaSelect = {categoriaSelect}/>
+       <div style ={{ textAlign: 'center', display: 'flex', width: '70%' }}> 
+        <Button 
+          style = {{ background:'radial-gradient(orange, transparent)', marginTop: '25px' ,marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
+          variant="contained" size="large"
+          onClick={ ()=> { router.push(`/dashboard/productos/''/add`) }}
+        >
+            Agregar
+        </Button> 
+        <Button 
+          style = {{ background:'white', color:'red',  marginTop: '25px' ,marginLeft: '12px', width: '90%', height: '55px', fontSize: "15px"}}
+          variant="contained" size="large"
+          onClick={ ()=> { router.push(`/dashboard`) }}
+        >
+            Volver
+        </Button>
+        </div>
     </Layout>
         
   );

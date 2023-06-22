@@ -24,6 +24,8 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import { toast } from 'react-toastify'
+import axios from 'axios';
 import Select from '@mui/material/Select';
 import { visuallyHidden } from '@mui/utils';
 
@@ -325,6 +327,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
         const selectedIndex = selected.indexOf(producto.name);
         let newSelected = [];
 
+        console.log("selecto:", selected)
         if (selected !== producto.name) {
             setEditProducto(producto)
             return setSelected(producto.name);
@@ -347,6 +350,23 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const handleChangeDense = (event) => {
         setDense(event.target.checked);
     };
+
+    const handleDelete = async (e) => {
+        try {
+            //toast.error('No permitido!!');
+            //return router.push("/dashboard/categorias");
+            const res = await axios.delete("/api/productos/" + e._id);
+        
+          if (res.status === 204) {
+            toast.success('Producto eliminado!!');
+            return router.push("/dashboard/productos");
+          } 
+          router.push("/dashboard/productos");
+      
+          } catch (error) {
+            console.log("msg:", error)
+          }
+    }
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -395,7 +415,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
                     {selected.length > 0 ? (
                         <>
                             <Tooltip title="Delete">
-                                <IconButton>
+                                <IconButton onClick ={ ()=> { handleDelete(editProducto)}}>
                                     <DeleteIcon />
                                 </IconButton>
                             </Tooltip>

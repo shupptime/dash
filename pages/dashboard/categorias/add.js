@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { toast } from 'react-toastify'
+import axios from 'axios';
 
 // hook
 import { query, useRouter } from "next/router";
@@ -33,23 +34,24 @@ export default function Edit() {
     _body.title = title;
 
     try {
-        const res = await fetch("https://eat-ser.vercel.app/api/categorias", {
+       /*  const res = await fetch("https://eat-ser.vercel.app/api/categorias", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
             },
             body: JSON.stringify(_body),
-      });
+      }); */
+      const data  = axios.post('/api/categorias',_body )
 
-      console.log("res.status: ", res.status);
-      res.status == 201 ? toast.success('Categoria agregada!!') :  toast.error('Error!!')
-      
+  
       setTimeout(() => { 
+        toast.success('Categoria agregada!!')
         return router.push("/dashboard/categorias");
     }, 2000)
 
       
     } catch (error) {
+      toast.error('Error!!')
       console.error(error);
     }
   };

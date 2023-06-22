@@ -36,7 +36,7 @@ export default function Login() {
   const updateProduct = async () => {
     try {
       const { _id, name, price, image, categoryId } = cuerpo;
-      //console.log("llega dato a acualizar:", cuerpo);
+      
       //return toast.error('no permitido!!');
       const res = await axios.put("/api/productos/" + _id, cuerpo);
       /* const res = await fetch("https://eat-ser.vercel.app/api/productos/" + _id, {

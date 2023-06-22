@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from "axios";
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -183,9 +184,8 @@ function EnhancedTableToolbar(props) {
     const handleDelete = async (cat) => {
 
         try {
-            toast.error('No permitido!!');
-            console.log("prod a eliminar:", cat)
-            return router.push("/dashboard/categorias");
+            // toast.error('No permitido!!');
+            //return router.push("/dashboard/categorias");
             const res = await axios.delete("/api/categorias/" + cat._id);
 
             if (res.status === 204) {
@@ -304,8 +304,14 @@ export default function EnhancedTable({ categorias }) {
              );
          } */
 
-        setSelected(newSelected.concat(row.title));
-        setCatDelete(row)
+        // setSelected(newSelected.concat(row.title));
+        // setCatDelete(row)
+        if (selected !== row.title) {
+            setCatDelete(row)
+            return setSelected(row.title);
+        } else {
+            return setSelected([]);
+        }
     };
 
     const handleChangePage = (event, newPage) => {

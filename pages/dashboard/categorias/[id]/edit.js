@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import Layout from '../../../../layout/Layout';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -7,7 +8,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
+
 
 // hook
 import { query, useRouter } from "next/router";
@@ -21,10 +23,12 @@ export default function Edit() {
 
   const getCategoria = async () => {
     try {
-      const res = await fetch(`https://shuppdash.vercel.app/api/categorias/${query.id}`);
-      const categoria = await res.json();
 
-      return setTitle(categoria.title);
+      const { data } = await axios(`/api/categorias/${query.id}`);
+      console.log("data", data)
+      // const categoria = await res.json();
+      return setTitle(data.title);
+
 
     } catch (error) {
       console.log("message: ", error)
@@ -38,22 +42,16 @@ export default function Edit() {
 
     try {
 
-      const res = await fetch("https://eat-ser.vercel.app/api/categorias/" + query.id, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(_body),
-      });
-
-
-      // console.log("res.status: ", res.status);
-      res.status == 200 ? toast.success('Categoria agregada!!') : toast.error('Error!!')
+      const data = await axios.put(`/api/categorias/${query.id}`, _body);
+      console.log("data:",data)
+      toast.success('Categoria agregada!!')
       setTimeout(() => {
+        
         return router.push("/dashboard/categorias");
       }, 2000)
 
     } catch (error) {
+      toast.error('Error!!')
       console.error(error);
     }
 
@@ -105,16 +103,17 @@ export default function Edit() {
               >
                 Editar
               </Button>
-              <Button
+              
+            </Box>
+            <Button
                 type="submit"
-                fullWidth
+                
                 variant="contained"
-                sx={{ mt: 1, mb: 2, color: 'red', background: 'white' }}
+                sx={{ mt: 2, mb: 2, color: 'red', background: 'white', display: 'flex', width: '80%'}}
                 onClick={() => { router.push(`/dashboard/categorias`) }}
               >
                 Volver
               </Button>
-            </Box>
 
           </Box>
         </Container>
