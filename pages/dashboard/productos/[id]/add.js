@@ -40,14 +40,7 @@ export default function Login() {
    
   const createProduct = async () => {
     try {
-        const res = await fetch("https://eat-ser.vercel.app/api/productos", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify(cuerpo),
-      });
-
+      const data  = axios.post('/api/productos', cuerpo )
         toast.success('Producto agregado!!');
         setTimeout(() => { 
           return router.push(`/dashboard/productos/${query.id}/edit`);
@@ -62,10 +55,9 @@ export default function Login() {
   };
   const getCategorias = async () => {
     try {
-      
-      const res = await fetch(`https://eat-ser.vercel.app/api/categorias`);
-      const categorias = await res.json();
-      setCategorias(categorias);
+
+      const {data} = await axios(`/api/categorias`);
+      setCategorias(data);
     } catch (error) {
       console.log("message: ", error)
     }
@@ -221,7 +213,8 @@ export default function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 1, mb: 2, color: 'red', background: 'white' }}
-              onClick={()=>{  router.push(`/dashboard/productos/${query.id}/dash`) }}
+              // antes/${query.id}/dash
+              onClick={()=>{  router.push(`/dashboard/productos`) }}
             >
               Volver
             </Button>
