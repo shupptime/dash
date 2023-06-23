@@ -36,6 +36,7 @@ const QuioscoProvider = ({children}) => {
             a.push(e)   
           }
       })
+      console.log("aux", a)
       setUltProd(a)
   
       } catch (error) {

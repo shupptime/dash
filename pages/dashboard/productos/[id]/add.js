@@ -41,15 +41,16 @@ export default function Login() {
   const createProduct = async () => {
     try {
       const data  = axios.post('/api/productos', cuerpo )
+      console.log("data", data)
         toast.success('Producto agregado!!');
         setTimeout(() => { 
-          return router.push(`/dashboard/productos/${query.id}/edit`);
+          return router.push(`/dashboard/productos`);
       }, 2000)
         
     } catch (error) {
       toast.error('error en carga!!')
       console.error(error);
-      router.push(`/dashboard/productos/${query.id}/edit`);
+      router.push(`/dashboard/productos`);
      
     }
   };

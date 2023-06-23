@@ -274,7 +274,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const numSelected = 0;
     const [cuerpo, setCuerpo] = React.useState({ _id: '', title: '' });
-    const { orderByCategory, ultProd } = useQuiosco();
+    const { orderByCategory, ultProd, obtieneUltProd } = useQuiosco();
     //Inicia tabla com productos no seleccionado y luego al usar una categoria queda asignado al inicio del componente
     const [catSelect, setCatSelect] = React.useState(orderByCategory);
     const router = useRouter();
@@ -349,14 +349,19 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
         try {
             //toast.error('No permitido!!');
             //return router.push("/dashboard/categorias");
-            const res = await axios.delete("/api/productos/" + e._id);
-        
-          if (res.status === 204) {
+            await axios.delete("/api/productos/" + e._id);
+            console.log("categodiaID:", e.categoryId)
+
+            console.log("ultProd11:", ultProd)
+            // obtieneUltProd(e.categoryId)
+            //setCatSelect(ultProd)
+            console.log("ultProd:", ultProd)
             toast.success('Producto eliminado!!');
-            return router.push("/dashboard/productos");
-          } 
-          router.push("/dashboard/productos");
-      
+            setTimeout(() => { 
+
+                return router.push("/dashboard/productos");
+            }, 2000)
+          
           } catch (error) {
             console.log("msg:", error)
           }
