@@ -350,13 +350,14 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
         try {
             //toast.error('No permitido!!');
             //return router.push("/dashboard/categorias");
+            //obtieneUltProd(e.categoryId)
             await axios.delete("/api/productos/" + e._id);
             console.log("categodiaID:", e.categoryId)
 
-            console.log("ultProd11:", ultProd)
-            // obtieneUltProd(e.categoryId)
+            obtieneUltProd(e.categoryId)
             //setCatSelect(ultProd)
-            console.log("ultProd:", ultProd)
+            // console.log("ultProd:", ultProd)
+            
             toast.success('Producto eliminado!!');
             setTimeout(() => { 
 

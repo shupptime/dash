@@ -22,6 +22,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { toast } from 'react-toastify'
 
+import useQuiosco from '../../../../hooks/useQuiosco'
 
 // hook
 import { query, useRouter } from "next/router";
@@ -32,6 +33,7 @@ export default function Login() {
   const theme = createTheme();
   const [cuerpo, setCuerpo] = useState({ name: '', price: '', img: '', categoryId: '' });
   const [ categorias , setCategorias] = useState([])
+  const { obtieneUltProd  } = useQuiosco();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,10 +43,12 @@ export default function Login() {
   const createProduct = async () => {
     try {
       const data  = axios.post('/api/productos', cuerpo )
-      console.log("data", data)
-        toast.success('Producto agregado!!');
-        setTimeout(() => { 
-          return router.push(`/dashboard/productos`);
+     
+      obtieneUltProd(cuerpo.categoryId)
+      toast.success('Producto agregado!!');
+      
+      setTimeout(() => { 
+        return router.push(`/dashboard/productos`);
       }, 2000)
         
     } catch (error) {
