@@ -17,26 +17,38 @@ const QuioscoProvider = ({children}) => {
     const [productosAux, setProductoAux] = useState([])
     const [orderByCategory, setOrd] = useState([])
     const [ultProd, setUltProd] = useState([])
+    const [auxCat, setAuxCat]= useState([])
 
     let lista = 0 ;
 
     const router = useRouter()
 
-    //Obtiene productos de la ultima categoria sellecionada.
+    const obtienUltCat = async (idCat)=> {
+      const {data} = await axios(`/api/categorias`); 
+       
+      let a =[];
+      
+      data.map( e => {
+        if(e._id === idCat){
+          a.push(e)   
+        }
+    })
+    
+    setAuxCat(a)
+
+    }
+    //Obtiene productos de la ultima categoria seleccionada.
     const obtieneUltProd = async (idCat) => {
       try {
         const {data} = await axios(`/api/productos`); 
-        // ultProd.push(data)
-        
-        // setUltProd([data])
-        // let a = data.find((e) => e.categoryId === idCat )
         let a =[];
+
         data.map( e => {
           if(e.categoryId === idCat){
             a.push(e)   
           }
-      })
-      console.log("aux", a)
+        })
+      obtienUltCat(idCat)
       setUltProd(a)
   
       } catch (error) {
@@ -1495,7 +1507,9 @@ const QuioscoProvider = ({children}) => {
                 obtenerProdPoCatActual,
                 orderByCategory,
                 obtieneUltProd,
-                ultProd
+                ultProd,
+                obtienUltCat,
+                auxCat
 
             }}
         >

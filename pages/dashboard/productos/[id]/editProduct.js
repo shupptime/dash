@@ -41,17 +41,10 @@ export default function Login() {
       
       //return toast.error('no permitido!!');
       const res = await axios.put("/api/productos/" + _id, cuerpo);
-      /* const res = await fetch("https://eat-ser.vercel.app/api/productos/" + _id, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "no cors",
-        },
-        body: JSON.stringify({ name, price, image, categoryId }),
-      }); */
-
-      console.log("res.status: ", res.status);
       toast.success('Producto actualizado!!');
+
+      //Obtiene ultimo seleccionado y actualiza la tabla de productosdel componente TableProduct
+      obtieneUltProd(categoryId)
       setTimeout(() => {
         return router.push(`/dashboard/productos`);
       }, 2000)

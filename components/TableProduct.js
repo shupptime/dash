@@ -274,14 +274,15 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const numSelected = 0;
     const [cuerpo, setCuerpo] = React.useState({ _id: '', title: '' });
-    const { orderByCategory, ultProd, obtieneUltProd } = useQuiosco();
+    const { orderByCategory, ultProd, obtieneUltProd, auxCat, obtienUltCat  } = useQuiosco();
     //Inicia tabla com productos no seleccionado y luego al usar una categoria queda asignado al inicio del componente
     const [catSelect, setCatSelect] = React.useState(orderByCategory);
     const router = useRouter();
-    const [aux, setAux] = React.useState([]);
-
+    // const [aux, setAux] = React.useState([]);
+    console.log("auxCat:", auxCat)
   
     const handleChanged = (e) => {
+        console.log("eeee", e.target.value)
         setCuerpo({
             _id: e.target.value._id,
             title: e.target.value.title
@@ -298,7 +299,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
 
         })
         setCatSelect(cat)
-        console.log("cat", catSelect)
+        console.log("cacatSelectt", cat)
 
     }
 
