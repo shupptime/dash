@@ -70,7 +70,7 @@ export default function Login() {
 
     const onDrop = useCallback(acceptedFiles => {
       // Do something with the files
-      console.log("diego:", acceptedFiles)
+      
       const formData = new FormData()
       formData.append('image', acceptedFiles[0])
       const { data } = axios.post('http://localhost:3000/api/img',formData )
@@ -219,7 +219,8 @@ export default function Login() {
               variant="contained"
               sx={{ mt: 1, mb: 2, color: 'red', background: 'white' }}
               // antes/${query.id}/dash
-              onClick={()=>{  router.push(`/dashboard/productos`) }}
+              onClick={()=>{  
+                router.push(`/dashboard/productos`) }}
             >
               Volver
             </Button>

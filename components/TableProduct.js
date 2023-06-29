@@ -281,6 +281,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     // const [aux, setAux] = React.useState([]);
     console.log("auxCa- cuando inicia:", auxCat)
     console.log("inicia orderByCategory:", orderByCategory)
+    console.log("inicio catSelect", catSelect)
   
     const handleChanged = (e) => {
         setCuerpo({
@@ -299,6 +300,11 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
 
         })
         setCatSelect(cat)
+        obtieneUltProd(e.target.value._id)
+        console.log("cual,es:", e.target.value._id)
+        console.log("actual produtos:", orderByCategory)
+        console.log("eeeeeeeeee<<<<:", cat)
+
 
     }
 
