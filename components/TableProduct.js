@@ -279,10 +279,10 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const [catSelect, setCatSelect] = React.useState(orderByCategory);
     const router = useRouter();
     // const [aux, setAux] = React.useState([]);
-    console.log("auxCat:", auxCat)
+    console.log("auxCa- cuando inicia:", auxCat)
+    console.log("inicia orderByCategory:", orderByCategory)
   
     const handleChanged = (e) => {
-        console.log("eeee", e.target.value)
         setCuerpo({
             _id: e.target.value._id,
             title: e.target.value.title
@@ -299,7 +299,6 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
 
         })
         setCatSelect(cat)
-        console.log("cacatSelectt", cat)
 
     }
 
@@ -321,8 +320,7 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     const handleClick = (event, producto) => {
         const selectedIndex = selected.indexOf(producto.name);
         let newSelected = [];
-
-        console.log("selecto:", selected)
+        
         if (selected !== producto.name) {
             setEditProducto(producto)
             return setSelected(producto.name);
@@ -330,7 +328,6 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
             return setSelected([]);
         }
 
-        setSelected(newSelected);
     };
 
     const handleChangePage = (event, newPage) => {
@@ -348,24 +345,23 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
 
     const handleDelete = async (e) => {
         try {
-            //toast.error('No permitido!!');
-            //return router.push("/dashboard/categorias");
-            //obtieneUltProd(e.categoryId)
-            await axios.delete("/api/productos/" + e._id);
-            console.log("categodiaID:", e.categoryId)
 
-            obtieneUltProd(e.categoryId)
-            //setCatSelect(ultProd)
-            // console.log("ultProd:", ultProd)
+            const res = await axios.delete("/api/productos/" + e._id);
             
-            toast.success('Producto eliminado!!');
-            setTimeout(() => { 
-
+            if (res.status == 204){
+                obtieneUltProd(e.categoryId);
+                
+                //Carga los ultimos productos actualizados
+                setCatSelect(orderByCategory)
+                
+                toast.success('Producto eliminado!!');
+                setSelected([]);
                 return router.push("/dashboard/productos");
-            }, 2000)
+                
+            }
           
           } catch (error) {
-            console.log("msg:", error)
+            console.log("msg-delete:", error)
           }
     }
 
