@@ -278,10 +278,9 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
     //Inicia tabla com productos no seleccionado y luego al usar una categoria queda asignado al inicio del componente
     const [catSelect, setCatSelect] = React.useState(orderByCategory);
     const router = useRouter();
-    // const [aux, setAux] = React.useState([]);
-    console.log("auxCa- cuando inicia:", auxCat)
+
     console.log("inicia orderByCategory:", orderByCategory)
-    console.log("inicio catSelect", catSelect)
+    
   
     const handleChanged = (e) => {
         setCuerpo({
@@ -301,10 +300,6 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
         })
         setCatSelect(cat)
         obtieneUltProd(e.target.value._id)
-        console.log("cual,es:", e.target.value._id)
-        console.log("actual produtos:", orderByCategory)
-        console.log("eeeeeeeeee<<<<:", cat)
-
 
     }
 
@@ -354,15 +349,41 @@ export default function EnhancedTable({ categorias, productos, categoriaSelect }
 
             const res = await axios.delete("/api/productos/" + e._id);
             
-            if (res.status == 204){
+            if (res.status === 204){
                 obtieneUltProd(e.categoryId);
-                
-                //Carga los ultimos productos actualizados
-                setCatSelect(orderByCategory)
-                
-                toast.success('Producto eliminado!!');
+        
                 setSelected([]);
-                return router.push("/dashboard/productos");
+                const {data} = await axios(`/api/productos`);
+                
+                let a = [];
+                //encuentra el borrado ?
+                data.map( item => {
+                    if(item.categoryId === e.categoryId){
+                        a.push(e) // no va item?
+                    }
+                })
+                console.log("aa:", a)
+                
+                // filtra y devuelve los productos actuales
+                let aux = [];
+                console.log("deleee", orderByCategory)
+                orderByCategory.map( i => {
+                    if( i._id !== e._id) {
+                        aux.push(i)
+                    }
+                })
+
+                //Carga los ultimos productos actualizados
+                console.log("aux:", aux)
+                setCatSelect(aux)
+                // obtieneUltProd(e.categoryId);
+                console.log("delete ordercat", orderByCategory)
+                toast.success('Producto eliminado!!');
+                //console.log("selected", selected)
+                
+                setTimeout(() => {
+                    return router.push(`/dashboard/productos`);
+                  }, 2000)
                 
             }
           

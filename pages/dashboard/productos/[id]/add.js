@@ -44,6 +44,7 @@ export default function Login() {
     try {
       const data  = axios.post('/api/productos', cuerpo )
      
+      console.log("cuerpo.categoryId:", cuerpo.categoryId)
       obtieneUltProd(cuerpo.categoryId)
       toast.success('Producto agregado!!');
       
