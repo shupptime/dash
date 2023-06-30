@@ -33,7 +33,7 @@ export default function Login() {
   const theme = createTheme();
   const [cuerpo, setCuerpo] = useState({ name: '', price: '', img: '', categoryId: '' });
   const [ categorias , setCategorias] = useState([])
-  const { obtieneUltProd  } = useQuiosco();
+  const { obtieneUltProd, orderByCategory  } = useQuiosco();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,8 +44,12 @@ export default function Login() {
     try {
       const data  = axios.post('/api/productos', cuerpo )
      
-      console.log("cuerpo.categoryId:", cuerpo.categoryId)
+      
+      const ok = await axios(`/api/categorias/${cuerpo.categoryId}`);
+      console.log("okkk", ok)
+
       obtieneUltProd(cuerpo.categoryId)
+      console.log("createee:", orderByCategory)
       toast.success('Producto agregado!!');
       
       setTimeout(() => { 
